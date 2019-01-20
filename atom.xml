@@ -37,27 +37,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://www.akringblog.com/2019/01/17/hello-world/"/>
-    <id>https://www.akringblog.com/2019/01/17/hello-world/</id>
-    <published>2019-01-17T02:58:09.950Z</published>
-    <updated>2019-01-17T02:58:09.951Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>iOS Moya 实现 OAuth 2.0 请求</title>
     <link href="https://www.akringblog.com/2019/01/08/iOS%20Moya%20%E5%AE%9E%E7%8E%B0%20OAuth%202.0%20%E8%AF%B7%E6%B1%82/"/>
     <id>https://www.akringblog.com/2019/01/08/iOS Moya 实现 OAuth 2.0 请求/</id>
@@ -482,6 +461,26 @@
     
     
       <category term="Python" scheme="https://www.akringblog.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac下的切图神器——Slicy使用说明</title>
+    <link href="https://www.akringblog.com/2014/12/08/Mac%E4%B8%8B%E7%9A%84%E5%88%87%E5%9B%BE%E7%A5%9E%E5%99%A8%E2%80%94%E2%80%94Slicy%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>https://www.akringblog.com/2014/12/08/Mac下的切图神器——Slicy使用说明/</id>
+    <published>2014-12-08T15:30:21.000Z</published>
+    <updated>2019-01-20T11:18:32.505Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>切图作为美工出图的最后一步，向来都是令人头疼的工作，其工作内容繁琐枯燥，但又必不可少。同时，作为IOS开发者，我们往往需要为程序准备两套图片资源，以应对低清屏和Retina屏的不同需求，随之而来的是切图工作量的成倍增加。今天为大家推荐一款Mac下的切图小工具——Slicy，以上烦恼皆可得到妥善的解决。<br><a id="more"></a></p><blockquote><p>软件特性  </p><ol><li>切图方便，简单的拖放即可，傻瓜式操作2.   </li><li>培养为图片资源合理命名的好习惯  </li><li>自动生成@2x两套图片，极大方便IOS开发者  </li></ol></blockquote><h1 id="二、软件使用"><a href="#二、软件使用" class="headerlink" title="二、软件使用"></a>二、软件使用</h1><h2 id="1、PSD文件的预处理"><a href="#1、PSD文件的预处理" class="headerlink" title="1、PSD文件的预处理"></a>1、PSD文件的预处理</h2><blockquote><p>这一步可以由UI设计师来处理，不过个人推荐程序员亲自完成这一步骤，因为这里涉及到图片的命名，我们自己来对图片进行命名可以更好的使之符合整个项目的命名规则，方便在项目中对对应图片资源进行调用和管理。  </p></blockquote><p>首先用PhotoShop打开美工给你的PSD文件，如下图<br><img src="http://akring-blog-image.qiniudn.com/Slicy-BlogPSD%E5%8E%9F%E6%96%87%E4%BB%B6.png" alt="PSD原文件"><br>图中的绿色状态图标即为本次需要切出的素材图片</p><p>在右侧分组面板中，选中对应的组“Statues”</p><p><img src="http://akring-blog-image.qiniudn.com/Slicy-BlogPSD%E5%8E%9F%E5%88%86%E7%BB%84.png" alt="PSD原分组"></p><p>对“Statues”组的组名进行重命名，将其重命名为“<a href="mailto:Statues@2x.png" target="_blank" rel="noopener">Statues@2x.png</a>”，全部完成后保存PSD文件即可。</p><p><img src="http://akring-blog-image.qiniudn.com/Slicy-BlogPSD%E5%91%BD%E5%90%8D%E5%90%8E.png" alt="PSD命名后"></p><blockquote><p>这里要注意别忘了@2x后面的“.png”。同时，这里的命名即为图片素材被切出后的名字，因此建议大家在命名时考虑到项目整体的命名规则和调用的方便来进行命名，避免图片切好之后再来修改名字，浪费时间。  </p></blockquote><p>到这里，PSD文件的预处理就完成了，事实上这一步也是整个流程中比较繁琐的一步了，完成了这些，今天的切图工作就已经完成了八成。</p><h2 id="2、令人愉悦的切图工作"><a href="#2、令人愉悦的切图工作" class="headerlink" title="2、令人愉悦的切图工作"></a>2、令人愉悦的切图工作</h2><blockquote><p><strong>问：使用Slicy切图总共分几步？</strong>  </p></blockquote><blockquote><p><strong>答：总共分2步</strong>  </p></blockquote><blockquote><p><strong>第一步：把PSD拖进去</strong>  </p></blockquote><blockquote><p><strong>第二步：把图片拖出来</strong>  </p></blockquote><p>是的，就是如此简单，打开Slicy的主界面，你可以看到其主界面也是如此的简单。。。</p><p><img src="http://akring-blog-image.qiniudn.com/Slicy-BlogSlicy%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="Slicy主界面"></p><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>将我们预处理好的PSD文件拖进去，在一段令人愉悦的动画之后，我们会看到这个：</p><p><img src="http://akring-blog-image.qiniudn.com/Slicy-Blog%E6%8B%96%E6%94%BEPSD%E5%90%8E.png" alt="PSD拖放后"></p><h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>按住Command + A快捷键全选，将图片拖到你需要的地方</p><p><img src="http://akring-blog-image.qiniudn.com/Slicy-Blog%E5%AF%BC%E5%87%BA%E5%90%8E.png" alt="PSD导出后"></p><p>可以看到，一套严格命名，大小合规的图片已经被切好导出了，就是这么简单！</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Slicy的存在使得原本繁琐的切图工作变得轻松惬意，尤其是当程序猿霸气的对美工妹子说：“看你那么辛苦，今天的图我来切”时，相信大多数美工妹子都会感动的痛哭流涕有木有。。。<br>综上，Slicy使用简单，小巧清爽，实在是居家旅行，<del>杀人灭口</del>勾搭美工的必备神器。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;切图作为美工出图的最后一步，向来都是令人头疼的工作，其工作内容繁琐枯燥，但又必不可少。同时，作为IOS开发者，我们往往需要为程序准备两套图片资源，以应对低清屏和Retina屏的不同需求，随之而来的是切图工作量的成倍增加。今天为大家推荐一款Mac下的切图小工具——Slicy，以上烦恼皆可得到妥善的解决。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="UI" scheme="https://www.akringblog.com/tags/UI/"/>
     
   </entry>
   
