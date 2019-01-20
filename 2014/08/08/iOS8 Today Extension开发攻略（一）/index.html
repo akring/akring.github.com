@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>iOS8 Today Extension开发攻略（一） | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Objective-C">
+    <meta name="description" content="iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，它不仅可以为你的App提供一个快捷功能的入口，还能用于简单的数据展示。这对于增进用户黏着度，扩展应用场景都有很好的帮助。这是我撰写的iOS8 Today Extension开发攻略的第一篇，内容主要集中于如何通过Today Extension，实">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS8 Today Extension开发攻略（一）">
+<meta property="og:url" content="https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，它不仅可以为你的App提供一个快捷功能的入口，还能用于简单的数据展示。这对于增进用户黏着度，扩展应用场景都有很好的帮助。这是我撰写的iOS8 Today Extension开发攻略的第一篇，内容主要集中于如何通过Today Extension，实">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-1@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-3@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-5@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-6@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-4@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-8@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-9@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-4@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-1@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-2@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-3@2x.png">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/Todayfinished.gif">
+<meta property="og:updated_time" content="2019-01-20T11:15:02.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS8 Today Extension开发攻略（一）">
+<meta name="twitter:description" content="iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，它不仅可以为你的App提供一个快捷功能的入口，还能用于简单的数据展示。这对于增进用户黏着度，扩展应用场景都有很好的帮助。这是我撰写的iOS8 Today Extension开发攻略的第一篇，内容主要集中于如何通过Today Extension，实">
+<meta name="twitter:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-1@2x.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">iOS8 Today Extension开发攻略（一）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">iOS8 Today Extension开发攻略（一）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-08-08T03:30:21.000Z" itemprop="datePublished" class="page-time">
+  2014-08-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-iOS8 Today Extension开发攻略（一）" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">iOS8 Today Extension开发攻略（一）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-08-08 11:30:21" datetime="2014-08-08T03:30:21.000Z" itemprop="datePublished">2014-08-08</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，它不仅可以为你的App提供一个快捷功能的入口，还能用于简单的数据展示。这对于增进用户黏着度，扩展应用场景都有很好的帮助。这是我撰写的iOS8 Today Extension开发攻略的第一篇，内容主要集中于如何通过Today Extension，实现快捷跳转到App的指定页面，进而实现快捷操作的目的。</p>
+<a id="more"></a>
+<p>###一、添加Today Extension</p>
+<p>新建一个singleView的iOS项目：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-1@2x.png" alt="新建项目" title="">
+                </div>
+                <div class="image-caption">新建项目</div>
+            </figure></p>
+<p>简单配置Storyboard，为项目添加一个二级页面，通过Modal的形式进行展现：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-3@2x.png" alt="storyboard" title="">
+                </div>
+                <div class="image-caption">storyboard</div>
+            </figure></p>
+<p>为项目添加一个target，类型选择“Application Extension”—“Today Extension”：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-5@2x.png" alt="target" title="">
+                </div>
+                <div class="image-caption">target</div>
+            </figure></p>
+<p>随后，为这个Target设定一个名字：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-6@2x.png" alt="targetName" title="">
+                </div>
+                <div class="image-caption">targetName</div>
+            </figure></p>
+<blockquote>
+<p>注意：这里的名字就是插件展示在通知中心中的名字，切勿随意输入，如图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-4@2x.png" alt="finish" title="">
+                </div>
+                <div class="image-caption">finish</div>
+            </figure>  </p>
+</blockquote>
+<p>选择Activate这个自动生成的scheme。</p>
+<p>接下来，我们就能开始为Today Extension编写逻辑代码和设计UI了。</p>
+<p>###二、设计Today Extension的UI</p>
+<p>在创建好Today Extension的target之后，Xcode会自动为我们创建一份Storyboard和一套.h/.m文件：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-8@2x.png" alt=".m" title="">
+                </div>
+                <div class="image-caption">.m</div>
+            </figure></p>
+<p>首先我们打开storyboard文件，拖入两个UIButton，并为其配置合适的Autolayout约束：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150602-9@2x.png" alt="button" title="">
+                </div>
+                <div class="image-caption">button</div>
+            </figure></p>
+<blockquote>
+<p>因为要考虑到iPhone5/6/6+的屏幕宽度问题，所以使用AutoLayout来配置界面是比较好的选择。当然，小伙伴们想要使用手写代码来适配界面的话也是可以的。  </p>
+</blockquote>
+<p>接下来通过以下代码修改widget的左边对齐，否则按钮无法居中显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets</span><br><span class="line">&#123;</span><br><span class="line">    return UIEdgeInsetsZero;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行一下，即可看到两个按钮都已经居中对齐了：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-4@2x.png" alt="finish" title="">
+                </div>
+                <div class="image-caption">finish</div>
+            </figure></p>
+<p>###三、为主应用设置URL Scheme</p>
+<p>Today Extension和主应用之间的交互主要是通过URL Scheme来完成，首先我们需要为主应用设置一个URL Scheme。<br>打开主应用中的info.plist文件，配置URL Scheme：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-1@2x.png" alt="scheme" title="">
+                </div>
+                <div class="image-caption">scheme</div>
+            </figure></p>
+<p>如此一来，我们主应用的URL Scheme就已经配置好了，我们可以使用Safari浏览器测试一下，在地址栏中输入<code>TodayWidgetTest://</code>,即可直接调起我们的主应用：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-2@2x.png" alt="safari" title="">
+                </div>
+                <div class="image-caption">safari</div>
+            </figure></p>
+<p>###四、编写Today Extension代码</p>
+<p>打开<code>TodayViewController.m</code>文件，添加两个Button的点击方法，并关联到Today Extension的StoryBoard。方法的代码如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/TodayQQ20150603-3@2x.png" alt="screenShot" title="">
+                </div>
+                <div class="image-caption">screenShot</div>
+            </figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//弹出Alert窗口</span><br><span class="line">- (IBAction)showAlert:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">  NSURL *url = [NSURL URLWithString:@&quot;TodayWidgetTest://showAlert&quot;];</span><br><span class="line"></span><br><span class="line">  [self.extensionContext openURL:url completionHandler:^(BOOL success) &#123;</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//弹出第二页</span><br><span class="line">- (IBAction)modalSecondView:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">  NSURL *url = [NSURL URLWithString:@&quot;TodayWidgetTest://modalSecondView&quot;];</span><br><span class="line">  </span><br><span class="line">  [self.extensionContext openURL:url completionHandler:^(BOOL success) &#123;</span><br><span class="line">  &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过判断URL:<code>TodayWidgetTest://modalSecondView</code>的内容，即可让Widget向主应用发送操作的通知  </p>
+</blockquote>
+<p>###五、处理URL</p>
+<p>打开项目的AppDelegate.m文件，添加一个系统代理方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation&#123;</span><br><span class="line"></span><br><span class="line">    if ([url.absoluteString hasPrefix:@&quot;TodayWidgetTest&quot;])&#123;//处理从今日通知中心过来的请求</span><br><span class="line"></span><br><span class="line">        UIViewController *root  = self.window.rootViewController;</span><br><span class="line"></span><br><span class="line">        if ([url.absoluteString hasSuffix:@&quot;showAlert&quot;])&#123;</span><br><span class="line"></span><br><span class="line">            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;警告&quot;</span><br><span class="line">                                                            message:@&quot;TodayWidgetTest&quot;</span><br><span class="line">                                                           delegate:self</span><br><span class="line">                                                  cancelButtonTitle:@&quot;确定&quot;</span><br><span class="line">                                                  otherButtonTitles:nil, nil];</span><br><span class="line"></span><br><span class="line">            [alert show];</span><br><span class="line"></span><br><span class="line">            return YES;</span><br><span class="line">        &#125;</span><br><span class="line">        else if ([url.absoluteString hasSuffix:@&quot;modalSecondView&quot;])&#123;</span><br><span class="line"></span><br><span class="line">            SecondViewController *vc = [root.storyboard instantiateViewControllerWithIdentifier:@&quot;secondVC&quot;];</span><br><span class="line"></span><br><span class="line">            [root presentViewController:vc animated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">            return YES;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过不同的URL后缀，识别并执行对应的操作，这里可以根据需要，执行所需的操作。  </p>
+</blockquote>
+<p>至此，Today Extension就可以正常使用了，以下是效果图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/Todayfinished.gif" alt="gif" title="">
+                </div>
+                <div class="image-caption">gif</div>
+            </figure></p>
+<p>附上代码文件：<br><a href="https://github.com/akring/TodayWidgetTest/tree/master" target="_blank" rel="noopener">Today Extension</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:15:02.267Z" itemprop="dateUpdated">2019-01-20 19:15:02</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&title=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&title=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&source=iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/11/30/修改UISearchBar输入框背景的方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">修改UISearchBar输入框背景的方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/06/05/纪念OBJC君/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">纪念OBJC君</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&title=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&title=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&source=iOS8为广大开发者带来了不少新的特性，如第三方自定义键盘，通知中心插件等。而位于通知中心中的Today Extension插件是我个人认为最有用的一项，..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS8 Today Extension开发攻略（一）》 — Akring's Blog&url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2014/08/08/iOS8 Today Extension开发攻略（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3awW7bMBAE0P7/T6dATwVSKbNDbpsCT6fAtmQ+BiDp2f3xI74+fl2fX/n99c+feXrO012f330fw7ULDw8Prxr60/U+rCd2NwXvsKcnP40ZDw8Pb5v3/mX5QN/Z+UCTu6IJwsPDw/unvPevTA7fOSwZAx4eHt7/xZtGFXcP3Hh4eHjfgZccbae8PIQ9P2pfyFrw8PDwYt60APYd/l6s7+Hh4eEdVNWTBffWcj89gkfPwcPDw1vgdUWmPJzd6IbKpxIPDw9vj5d8Zb4ZdBFtPtCE8fguHh4e3jEvL1yNl+CqDJaQxr8Y8PDw8K7ypg0E+aBPNoyNghweHh7eLV7y6CSQPTkQdwFE1C6Ah4eHt8DrilXTbWAPNgDj4eHhXeV1zU9dY0EeTHTbAB4eHt42Ly93dVNwMug88vgijMDDw8O7ypv+yJ9OR36MvhUlDyIJPDw8vIo3Le2fxBDn/4e8FewP+x4eHh7eMu8kOJje2zVdRZOFh4eHt8Y7b3V6f8601eBa+xceHh7eAi85BHeNBV380YGj7QoPDw9vgZdEsdOIodsA8pijTKzx8PDwjnldmeruXdNNaFDzwsPDw1vj5aWsHDANc29FD3h4eHjbvGmpKeGdHJRPYo5xDIGHh4dX8aYhabeFJEPPj8uD6cDDw8O7yvsIrnKHGW4hJ01aj0/Gw8PDW+blZbCckSzr3bYRBRl4eHh4C7yuNWq8QFd1/C7a6KIQPDw8vJz3Mbzyg3KyheQNVYthBB4eHl4V454XqPIWqHzzOCm84eHh4W3zpkfku0Wsacwxjpjx8PDw1nhd+So/BE+LZN0ONu6MwMPDw1vmJUPJ44Du6PwFJs8/8PDw8P4iL1m+p8t9F1hEhTc8PDy8Nd60FaBbsrup7CIPPDw8vD1e16uVRLF54T9vzJqGHXh4eHhXeT8B2SYr8HQF1DsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

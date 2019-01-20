@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>用CGRect映射解决ScrollView上的TextField的键盘遮挡问题 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Objective-C">
+    <meta name="description" content="用CGRect映射解决ScrollView上的TextField的键盘遮挡问题 1234567CGPoint pt;CGRect rc = [textField bounds];rc = [textField convertRect:rc toView:self.scrollView];pt = rc.origin;pt.x = 0;pt.y -= 60;[self.scrollView setC">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用CGRect映射解决ScrollView上的TextField的键盘遮挡问题">
+<meta property="og:url" content="https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="用CGRect映射解决ScrollView上的TextField的键盘遮挡问题 1234567CGPoint pt;CGRect rc = [textField bounds];rc = [textField convertRect:rc toView:self.scrollView];pt = rc.origin;pt.x = 0;pt.y -= 60;[self.scrollView setC">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T11:27:41.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用CGRect映射解决ScrollView上的TextField的键盘遮挡问题">
+<meta name="twitter:description" content="用CGRect映射解决ScrollView上的TextField的键盘遮挡问题 1234567CGPoint pt;CGRect rc = [textField bounds];rc = [textField convertRect:rc toView:self.scrollView];pt = rc.origin;pt.x = 0;pt.y -= 60;[self.scrollView setC">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用CGRect映射解决ScrollView上的TextField的键盘遮挡问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用CGRect映射解决ScrollView上的TextField的键盘遮挡问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2013-09-30T04:22:45.000Z" itemprop="datePublished" class="page-time">
+  2013-09-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-用CGRect映射解决ScrollView上的TextField的键盘遮挡问题" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用CGRect映射解决ScrollView上的TextField的键盘遮挡问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2013-09-30 12:22:45" datetime="2013-09-30T04:22:45.000Z" itemprop="datePublished">2013-09-30</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>用CGRect映射解决ScrollView上的TextField的键盘遮挡问题<br><!--morew--></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CGPoint pt;</span><br><span class="line">CGRect rc = [textField bounds];</span><br><span class="line">rc = [textField convertRect:rc toView:self.scrollView];</span><br><span class="line">pt = rc.origin;</span><br><span class="line">pt.x = 0;</span><br><span class="line">pt.y -= 60;</span><br><span class="line">[self.scrollView setContentOffset:pt animated:YES];</span><br></pre></td></tr></table></figure>
+<p>重点在于：<br><code>[textField convertRect:rc toView:self.scrollView];</code></p>
+<p>将原本为（0,0,x,y）的rect映射到ScrollView上，得到一个（0,382,x,y）的rect，进而取得textField在scrollView上的相对位置，从而实现滚动</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:27:41.731Z" itemprop="dateUpdated">2019-01-20 19:27:41</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&title=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&title=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/02/21/AVOS Cloud初探/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">AVOS Cloud初探</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2013/06/18/IOS代码中使用十六进制颜色的方法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS代码中使用十六进制颜色的方法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&title=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&title=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用CGRect映射解决ScrollView上的TextField的键盘遮挡问题》 — Akring's Blog&url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJklEQVR42u3aS44iMRAFwL7/pZntSDNFv5eukrAJr1ADxmEksvPz8xOv11/r6u//rqv3vt9t9uk/TyxsbGzsTdizo18d9P17E9jVDu9fn1uwsbGxT2VfHSU5ehu68iDUvjfZBxsbGxs72rTcbSUUYWNjY2PfxZ4VnvKE54qHjY2NjZ0fKCncv3+cpDez636wloaNjY398ey8K/r5jx/pb2NjY2N/MPs1Wu01tUM2+SjPTIGNjY19Erttx7bI2TjOeosCGxsb+3vYbUFnVhK6q/TfNnejVAQbGxt7c3b7MfkV5GlMPo7TBq1fAi02Njb2Eex8yCYp+rTI9UDbBkVsbGzs89jPhZPnSHljoNgNGxsbe1v2rNTeXlDybJvM5AHsPyfBxsbGPoi9XjbKd5i1KJI0pv2SsLGxsU9it43b2VBOO3yTJzlt+MTGxsY+j50fKy/x5DusDPG0icovVTRsbGzsbdnJD32+XZtOrF/KMCnCxsbGPo6dpB/5OM7scdtaWAmH2NjY2CexZ+FqVsTJg1YerpbCITY2Nvah7CdatrMmxKtcbdsAGxsb+yR2fvS7koecvV7YitrJ2NjY2Eewi5/7hTGalWLTyhVEIzvY2NjYG7Jnhf68BTtj5M/mqVTxjWFjY2NvxZ6V6fPruzfg3RvesLGxsb+HPWvNrgeqvJg1DJDY2NjYR7BXAlJ+6OSVLWk2uFN8M9jY2NhbsfMA1hZ0ZqOTKwWjKPhhY2NjH8fO04wEVpfpyyJUnthcirCxsbGPY6+XbJLry9d64lG3eLGxsbG3Zef/vuf4u8LYbFQoSWOwsbGxT2K3jduk/JQXp+4drCyCGTY2NvZB7FlbN4+N7XDPUtH/3qoVNjY29ibslXLPSot31mxomwGXV4mNjY19EHv2m58kISthMh/0SULmUtjDxsbG3oSdD0rOkElhKCkwrbd+sbGxsc9mP9dqTa5s1qhYCbrY2NjY38lujzgrMxXN2jLhwcbGxsaelebbZnCeVLTlp+iGsLGxsbdl51vchWyvvh0VilIRbGxs7CPYK//iD/vGZbDMk5a2UYGNjY29OfsPZUwHSp2SRGQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

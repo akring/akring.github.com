@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>自定义Mac标题栏样式 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Swift,Mac">
+    <meta name="description" content="与默认的Mac APP标题栏相比，类似Mac原生应用Reminder的标题栏具有更好的显示效果，标题栏和下方的Content View有效融合，整体风格能够保持一致。                                                                                                           而要实现这种风格，我">
+<meta name="keywords" content="Swift,Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义Mac标题栏样式">
+<meta property="og:url" content="https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="与默认的Mac APP标题栏相比，类似Mac原生应用Reminder的标题栏具有更好的显示效果，标题栏和下方的Content View有效融合，整体风格能够保持一致。                                                                                                           而要实现这种风格，我">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://akring-blog-image.qiniudn.com/2017-04-16-083042.jpg">
+<meta property="og:updated_time" content="2019-01-20T11:19:59.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义Mac标题栏样式">
+<meta name="twitter:description" content="与默认的Mac APP标题栏相比，类似Mac原生应用Reminder的标题栏具有更好的显示效果，标题栏和下方的Content View有效融合，整体风格能够保持一致。                                                                                                           而要实现这种风格，我">
+<meta name="twitter:image" content="http://akring-blog-image.qiniudn.com/2017-04-16-083042.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">自定义Mac标题栏样式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">自定义Mac标题栏样式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-22T03:30:21.000Z" itemprop="datePublished" class="page-time">
+  2017-01-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-自定义Mac标题栏样式" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">自定义Mac标题栏样式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-22 11:30:21" datetime="2017-01-22T03:30:21.000Z" itemprop="datePublished">2017-01-22</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>与默认的Mac APP标题栏相比，类似Mac原生应用Reminder的标题栏具有更好的显示效果，标题栏和下方的Content View有效融合，整体风格能够保持一致。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://akring-blog-image.qiniudn.com/2017-04-16-083042.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>而要实现这种风格，我们只需要对当前NSWindow做如下处理：</p>
+<!--morw-->
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.titlebarAppearsTransparent = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>对于这个属性，Apple官方文档里是这样解释的：</p>
+<blockquote>
+<p>When the value of this property is true, the title bar does not draw its background, which allows all content underneath it to show through. It only makes sense to set this property to true when NSFullSizeContentViewWindowMask is also set.  </p>
+</blockquote>
+<p>当<code>titlebarAppearsTransparent</code>设为<code>true</code>的时候，title bar将不会绘制其背景，换而言之，title bar将会变成透明的，使其完全和下面的View融为一体。</p>
+<p>与此同时，Apple还提到，将这个属性设置为true的同时，我们还需要设置Window<br>的<code>NSFullSizeContentViewWindowMask</code>，如以下代码所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.styleMask = [.fullSizeContentView]</span><br></pre></td></tr></table></figure>
+<p>本文涉及的完整代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span>: <span class="title">NSWindow</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">awakeFromNib</span><span class="params">()</span></span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">super</span>.awakeFromNib()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.title = <span class="string">"Star Order"</span></span><br><span class="line">        <span class="keyword">self</span>.styleMask = [.fullSizeContentView, .titled, .miniaturizable, .resizable, .closable]</span><br><span class="line">        <span class="keyword">self</span>.titlebarAppearsTransparent = <span class="literal">true</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">Utils</span>.positionWindowAtCenter(sender: <span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:19:59.939Z" itemprop="dateUpdated">2019-01-20 19:19:59</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&title=《自定义Mac标题栏样式》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&title=《自定义Mac标题栏样式》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义Mac标题栏样式》 — Akring's Blog&url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/08/Mac自定义标题栏响应双击Zoom的方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mac自定义标题栏响应双击Zoom的方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/06/12/Mac OS 下字符串复制到剪贴板/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS检测手机蜂窝网络制式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&title=《自定义Mac标题栏样式》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&title=《自定义Mac标题栏样式》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义Mac标题栏样式》 — Akring's Blog&url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/01/22/自定义Mac标题栏样式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3a0W7CMAwF0P3/T3evSKjptZ0wJp0+IQhrTiY15sY/P/F1vVzrT9/HXMXr9VvJ3TdceHh4eIOpr2+WI9fvvL+ez+d2bnh4eHjHeHe3WY9ZjyxMYrkBrJfpwYKHh4f3Bbz1JKpjegU9Hh4e3v/i5eVyb+Hm5TgeHh7eZ3h5qFotstdxxjzm2Ja14OHh4dVygKio/Z7XR8738PDw8Man6vkDNzn66jUBXIMLDw8P7wQvf+BOGqTyJoB8+Qoj8fDw8LbyekFtr6WgWi7nj/7bWeHh4eF9kFeNTfNHdr6UeQtCdLKHh4eHt5VXPXbqNRDMC/d8mfDw8PA+w8ubA8ql7ThiyLecaKJ4eHh4m3j5gz4pbasF+mRjiM738PDw8Dbx8sK3F6Tmi1WNMwphBx4eHt4xXi/M7bUL9IKM3tLj4eHh7eVVY4h5i1U1YshbB26brvDw8PCO8ZLHfRLvTiaal+NR8Y2Hh4d3jDfZAKrtAnn5nh+S3Y7Bw8PDO8ybbA89fD7R3vLh4eHhneAlTQB5L1M+0TyqyBkPfxMPDw/vAG/XY7raNJCEF3ujCjw8PLwJLx86KYJ7W0X1v/HQOoCHh4e3ibfrxtXmgzw4TjaVqKcMDw8PbxMvfxznTQbV1e01KETbGB4eHt4BXvJxNVbIv5tsCb1UAQ8PD++veJNAoRkcHBiDh4eHd5o3CRry5cgjj6R8j7IWPDw8vGO8ySQScBU/b3TAw8PD28u7ilcvLNhVmpc/xcPDwzvA27CrFLeN9eskFO79HTw8PLy9vN60JiOrW06+MZR/DeDh4eENePnJUXLLHFCNRcrfwsPDw/saXvW4qwqel9d4eHh438brldp50dwr0I/se3h4eHiDMCKfeu+QrHfE9YDEw8PDO8Cr/uDPefk71Wk1GXh4eHhT3i/8K0EFPGkO1QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

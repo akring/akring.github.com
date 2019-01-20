@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Swift Lint 的配置和使用 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Swift">
+    <meta name="description" content="一、安装个人倾向于使用 Homebre 直接安装在 Mac 上，无需对每个项目的 Podfile 做改动 1brew install swiftlint  完成安装后，还需要在项目中添加一个 Run Script，使每次 Build 都会自动调用 Swift Lint 作代码扫描和校正。 12345if which swiftlint &amp;gt;/dev/null; then  swiftlin">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift Lint 的配置和使用">
+<meta property="og:url" content="https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="一、安装个人倾向于使用 Homebre 直接安装在 Mac 上，无需对每个项目的 Podfile 做改动 1brew install swiftlint  完成安装后，还需要在项目中添加一个 Run Script，使每次 Build 都会自动调用 Swift Lint 作代码扫描和校正。 12345if which swiftlint &amp;gt;/dev/null; then  swiftlin">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T11:23:01.907Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift Lint 的配置和使用">
+<meta name="twitter:description" content="一、安装个人倾向于使用 Homebre 直接安装在 Mac 上，无需对每个项目的 Podfile 做改动 1brew install swiftlint  完成安装后，还需要在项目中添加一个 Run Script，使每次 Build 都会自动调用 Swift Lint 作代码扫描和校正。 12345if which swiftlint &amp;gt;/dev/null; then  swiftlin">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Swift Lint 的配置和使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Swift Lint 的配置和使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-20T08:20:31.000Z" itemprop="datePublished" class="page-time">
+  2018-07-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、Swift-Lint-配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、Swift Lint 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#忽略文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">忽略文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#禁用规则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">禁用规则</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Swift Lint 的配置和使用" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Swift Lint 的配置和使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-20 16:20:31" datetime="2018-07-20T08:20:31.000Z" itemprop="datePublished">2018-07-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>个人倾向于使用 Homebre 直接安装在 Mac 上，无需对每个项目的 Podfile 做改动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install swiftlint</span><br></pre></td></tr></table></figure>
+<!--morwe-->
+<p>完成安装后，还需要在项目中添加一个 <code>Run Script</code>，使每次 Build 都会自动调用 Swift Lint 作代码扫描和校正。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">which</span> swiftlint &gt;/dev/null; <span class="keyword">then</span></span><br><span class="line">  swiftlint</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上脚本的 <code>else</code> 分支会在当前设备未安装/配置 Swift Lint 的时候在控制台输出提示  </p>
+</blockquote>
+<h2 id="二、Swift-Lint-配置"><a href="#二、Swift-Lint-配置" class="headerlink" title="二、Swift Lint 配置"></a>二、Swift Lint 配置</h2><p>项目中可能会使用<code>Cocoapods</code>或<code>Carthage</code>引入了第三方库，如果不对 Swift Lint 加以配置，则会导致这部分第三方库也被纳入到代码检查的范围，这是我们不期望看到的。同时，如果你正在维护一个历史久远，可能从 Swfit 2 时期就存在的项目的话，打开 Swift Lint 之后你将可能看到 <code>999+</code>个红色的编译错误。同时大量修改代码，并确保功能不出问题，这对任何人来说应该都是极大的负担，在这种情况下，我们可能会期望暂时禁用某些规则，如<code>force_cast</code>，以便在确保项目正常编译的同时，渐进式的完成 Swfit Lint 的修改工作，而这一切都必须依赖于自定义的 <code>.swiftlint.yml</code>配置文件。</p>
+<h3 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h3><p>在项目根目录下创建一个<code>.swiftlint.yml</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .swiftlint.yml</span><br></pre></td></tr></table></figure>
+<p>然后为其加入如下代码：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">excluded:</span> <span class="comment"># 你所希望不要检索的路径,SwiftLint会无视掉该路径下的文件</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">Carthage</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">Pods</span></span><br></pre></td></tr></table></figure>
+<p>即可方便的忽略掉通过<code>Cocoapods</code>或<code>Carthage</code>引入的第三方库，如果项目中还有其他不想要做 Swift Lint 代码检查的文件或目录，也照此办理即可。</p>
+<h3 id="禁用规则"><a href="#禁用规则" class="headerlink" title="禁用规则"></a>禁用规则</h3><p>在<code>.swiftlint.yml</code>中加入如下代码：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disabled_rules:</span> <span class="comment"># 禁用指定的规则</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">force_try</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">force_cast</span></span><br></pre></td></tr></table></figure>
+<p>即可禁用对应的规则</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:23:01.907Z" itemprop="dateUpdated">2019-01-20 19:23:01</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&title=《Swift Lint 的配置和使用》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&title=《Swift Lint 的配置和使用》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Swift Lint 的配置和使用》 — Akring's Blog&url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/09/30/带参字符串国际化的一种写法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">带参字符串国际化的一种写法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/20/Swift中单例的正确写法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Swift中单例的正确写法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&title=《Swift Lint 的配置和使用》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&title=《Swift Lint 的配置和使用》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Swift Lint 的配置和使用》 — Akring's Blog&url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2018/07/20/Swift Lint 的配置和使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsElEQVR42u3awU7EMAwEUP7/p0HihATtju24gPR6qkq35OUQR+O8vcXX++f1/f7rk6/X1V/vv3z15P75gQsPDw+vNfSrKwFcMZL7ZOjJeC7HhoeHh7fGS4pBsvTPpyD5v4XigYeHh/ervPstcr5855OSlxY8PDy8/8vLQ4180Hh4eHh/k5cs4r3w4mzcsJi14OHh4cW8SQPst+4f6u/h4eHhFbvqk0V58rU8Sn7xfTw8PLwF3qTJ1BtWflQrObAVvYmHh4d3lDcZXHMu4wNYk+D4h7qHh4eHt8Crxrh5aalulKsR8+XU4OHh4S3w8tA2x08C4rwwJNONh4eHt8dLlulqoJC8X91AV4MMPDw8vA1e/olkKe8NpVpg8onDw8PD2+ZVl+PqREw2ynmV+yFrwcPDw1vg9QLcpLmVxxC9KXvxBA8PD2+NV/1Z/qv7YlBOl4uHEvDw8PC2edXlOw9w583+5tEEPDw8vAVevqBPtrnJ4BJ8L/LAw8PDO8ubHyS9H8SkkORjKNQ9PDw8vDEvv5KQtxfpJhORb8ejU2Z4eHh4A141cp0cmcqnpjpll+PEw8PDe4Q3qR55w6wHKI8EDw8Pb4E3CR2qy/S8idU8hoWHh4e3xjvVzp83wKpTc6Be4eHh4Y15+UKctKZONa6ahxvw8PDwjvLm/bFke/381hwPDw/vGV6+5Z00wHqLfnVseHh4eHu8PAztLeK9AwTNc2G9xAUPDw+vRapuXpMQ9lTxqMa+Ud3Dw8PDG/B6ZaPa+qoewEoKUtIww8PDw9vj9ULS3vxVy0k1HClvrPHw8PAGvDyi3T46MNoc4+Hh4f0xXvJm9cnZmCNqfeHh4eE9zpscKei9PykteHh4eHu8XtxwajM9KRgvChUeHh7eAu9sA6x60GrOOBxY4OHh4d298wE2DXOohk+mjwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>修改UISearchBar输入框背景的方法 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Objective-C">
+    <meta name="description" content="在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )view，再修改其背景，达到定制UISearchBar背景的效果，苹果在iOS5后加入了新的接口，用于修改UISearchBar的textField的背景：">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改UISearchBar输入框背景的方法">
+<meta property="og:url" content="https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )view，再修改其背景，达到定制UISearchBar背景的效果，苹果在iOS5后加入了新的接口，用于修改UISearchBar的textField的背景：">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T11:24:41.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修改UISearchBar输入框背景的方法">
+<meta name="twitter:description" content="在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )view，再修改其背景，达到定制UISearchBar背景的效果，苹果在iOS5后加入了新的接口，用于修改UISearchBar的textField的背景：">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">修改UISearchBar输入框背景的方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">修改UISearchBar输入框背景的方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-11-30T00:20:31.000Z" itemprop="datePublished" class="page-time">
+  2014-11-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-修改UISearchBar输入框背景的方法" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">修改UISearchBar输入框背景的方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-11-30 08:20:31" datetime="2014-11-30T00:20:31.000Z" itemprop="datePublished">2014-11-30</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )view，再修改其背景，达到定制UISearchBar背景的效果，苹果在iOS5后加入了新的接口，用于修改UISearchBar的textField的背景：</p>
+<a id="more"></a>
+<p><code>setSearchFieldBackgroundImage:forState:</code></p>
+<p>将以上代码放入AppDelegate.m的ViewDidLoad方法中即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UISearchBar.appearance().setSearchFieldBackgroundImage(UIImage(named: &quot;搜索框背景&quot;), forState: UIControlState.Normal)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:24:41.379Z" itemprop="dateUpdated">2019-01-20 19:24:41</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&title=《修改UISearchBar输入框背景的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&title=《修改UISearchBar输入框背景的方法》 — Akring's Blog&source=在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《修改UISearchBar输入框背景的方法》 — Akring's Blog&url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/12/08/Mac下的切图神器——Slicy使用说明/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mac下的切图神器——Slicy使用说明</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/08/08/iOS8 Today Extension开发攻略（一）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS8 Today Extension开发攻略（一）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&title=《修改UISearchBar输入框背景的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&title=《修改UISearchBar输入框背景的方法》 — Akring's Blog&source=在上古时期(iOS5)，修改UISearchBar的主要方法为：通过遍历UISearchbar的subView，找到负责输入的(UITextField )..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《修改UISearchBar输入框背景的方法》 — Akring's Blog&url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2014/11/30/修改UISearchBar输入框背景的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3aUW4rIRAEwNz/0slvomhJNwN+flLtl2Wv1xSRYNLMx0d8fX67fr//dOfTt56e+fv106eHLzw8PLzB0J+GtX4/v2c9NZPfepxKPDw8vGu89c+vF+VkQV8PYjKtf1jw8PDw3oCXDzSpdfcKejw8PLz/ize5p5249Z14eHh4/5bXPnpd/k5C22SzuZK14OHh4cW8vKh9n9dXzvfw8PDwxqfq+fF/Esi2jQV7I/zxTDw8PLwLvHzB3aO209E2eEXNYXh4eHhHeXlA0IYXeVybR711YwEeHh7eBV7bOLW3oM+PyvKyu0hT8PDw8LZ487Bgb+GelO+jGAIPDw/vAi8vatuSum0XaA+9oo0BDw8Pb8y7ERMkpXa+kcwnCA8PD+81vDwmmAS7+YS2YQceHh7ebV67fLdbSzJBeTgySqnx8PDwDvEmpKQ5YLLQt8dpf4S5eHh4eGNe/uU8YkgOtPLwoi3Qf7yPh4eHd4GXL8ftgw7U+PF4itYEPDw8vJfwzpbXeZwxaWLAw8PDu83bCyPqzCNuDphsDMeyFjw8PLyHZ06CgLx2bTebJIBItiI8PDy8e7y2qM03hnzK8gOzfELx8PDwbvBOZZ5tybs3ie1WgYeHh3ePlxz/nwptc2q7JdR5CR4eHt6Al4QIe4v73tHXXptXtPvh4eHhHeLlgUJbCq/vn4S5RbsVHh4e3jXeZBB7xfepwDcKI/Dw8PCu8ZKAoN0Y2nh3cuHh4eHd5n2W197Q8+1kctAV/d3w8PDwxrx2wZ0UuHvHZntBSU3Fw8PDK3mTg6621SBf3JOpjLYNPDw8vGu89mAsAbfbwzzgKD7Gw8PDeyGvbSzID9vyd4r/EvDw8PDehtcWzXtRwqhpAA8PD+8yb6/V6cayvjdBRdMVHh4e3pi31yzVtg60rQBtCX6sVwsPDw9vdX0BkvxUuT/+hcgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

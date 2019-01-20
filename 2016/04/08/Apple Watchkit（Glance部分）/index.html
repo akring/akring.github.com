@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Apple Watchkit（Glance部分） | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS">
+    <meta name="description" content="Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获取窗口。对Watch app来说，Glance是可选项，开发者可以选择性的对其进行实现。">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apple Watchkit（Glance部分）">
+<meta property="og:url" content="https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获取窗口。对Watch app来说，Glance是可选项，开发者可以选择性的对其进行实现。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/Art/glance_interface.png">
+<meta property="og:updated_time" content="2019-01-20T11:08:37.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apple Watchkit（Glance部分）">
+<meta name="twitter:description" content="Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获取窗口。对Watch app来说，Glance是可选项，开发者可以选择性的对其进行实现。">
+<meta name="twitter:image" content="https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/Art/glance_interface.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Apple Watchkit（Glance部分）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Apple Watchkit（Glance部分）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-08T04:00:59.000Z" itemprop="datePublished" class="page-time">
+  2016-04-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、特性"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、生命周期"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、生命周期</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、Glance界面"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、Glance界面</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-接入点"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1.接入点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-Glance-Interface-Controller"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.Glance Interface Controller</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-自定义Glance启动界面"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.自定义Glance启动界面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-其他注意事项"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4.其他注意事项</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Apple Watchkit（Glance部分）" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Apple Watchkit（Glance部分）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-04-08 12:00:59" datetime="2016-04-08T04:00:59.000Z" itemprop="datePublished">2016-04-08</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获取窗口。对Watch app来说，Glance是可选项，开发者可以选择性的对其进行实现。</p>
+<a id="more"></a>
+<h3 id="一、特性"><a href="#一、特性" class="headerlink" title="一、特性"></a>一、特性</h3><ul>
+<li>唯一性：一个APP只允许有一个Glance控制器</li>
+<li>实时性：及时更新Glance，以避免Glance展示出过期信息</li>
+<li>聚焦性：在Glance上永远都只展示最重要的数据</li>
+<li>只读性：Glance是只读的，不能与用户操作进行交互</li>
+<li>基于模板：Glance是基于模板设计的，且Glance的界面范围仅限于单个屏幕</li>
+</ul>
+<h3 id="二、生命周期"><a href="#二、生命周期" class="headerlink" title="二、生命周期"></a>二、生命周期</h3><p>　　Glance界面控制器的生命周期和其他WatchKit界面控制器类似，不过Glance的界面控制器的初始化要更早，以便于Glance能快速的显示给用户。为确保展示的信息是最新的，需要在willActivate方法中包含检查方法，以避免Glance展示出过时的信息。</p>
+<p>　　在WatchKit的启动顺序链中，WatchKit会自动针对当前的场景创建适用的controller，如果用户正在查看弹出的Glance，则创建Glance关联的controller；如果用户直接启动watch app，则WatchKit会从storyboard中载入对应的初始化controller。<br>　　<br>　　以上controller均由一个<code>WKInterfaceController</code>的子类进行管理，以下是其关键方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithContext:</td>
+<td>controller初始化方法</td>
+</tr>
+<tr>
+<td>willActivate</td>
+<td>UI加载完毕后调用</td>
+</tr>
+<tr>
+<td>didDeactivate</td>
+<td>watch app运行完毕即将失效前调用</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：一旦<code>willActivate</code>被调用，则controller中的所有属性操作都将变得不可用，因此不能在<code>willActivate</code>中进行属性设置。（使timer无效化或者停止动画之类的操作是可以的）  </p>
+</blockquote>
+<h3 id="三、Glance界面"><a href="#三、Glance界面" class="headerlink" title="三、Glance界面"></a>三、Glance界面</h3><h4 id="1-接入点"><a href="#1-接入点" class="headerlink" title="1.接入点"></a>1.接入点</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/WatchKitProgrammingGuide/Art/glance_interface.png" alt="EntryPoint" title="">
+                </div>
+                <div class="image-caption">EntryPoint</div>
+            </figure>
+<p>　　与传统iOS App在stroyboard中的表现类似，在增加WatchKit的target，并包含Glance之后，storyboard将会为Glance准备好UI界面与接入点。</p>
+<h4 id="2-Glance-Interface-Controller"><a href="#2-Glance-Interface-Controller" class="headerlink" title="2.Glance Interface Controller"></a>2.Glance Interface Controller</h4><p>Glance对应的Glance Interface Controller是<code>WKInterfaceController</code>的子类，其主要功能是为Glance配置布局，因此其实现也非常简单，主要包括以下两个方法：</p>
+<ol>
+<li><p><code>initWithContext</code>:用于初始化Glance</p>
+</li>
+<li><p><code>willActivate</code>:用于更新Glance的UI界面</p>
+</li>
+</ol>
+<p>当需要改动已经展示在屏幕上的UI元素时，我们可以使用<code>NSTimer</code>对象，或使用WatchKit中新加入的如<code>WKInterfaceDat</code>和<code>WKInterfaceTimer</code>等对象来对时间和计时进行操作。</p>
+<h4 id="3-自定义Glance启动界面"><a href="#3-自定义Glance启动界面" class="headerlink" title="3.自定义Glance启动界面"></a>3.自定义Glance启动界面</h4><p>在WatchKit中，当用户点击弹出的Glance时默认为打开Watch App并展示main interface controller管理的界面。我们可以在Glance的controller中调用<code>updateUserActivity:userInfo:</code>方法，自定义从Glance启动后Watch app展示的界面，方法如下：</p>
+<ol>
+<li>glance interface controller</li>
+</ol>
+<ul>
+<li><p>实现<code>initWithContext:</code>和<code>willActivate</code>方法。</p>
+</li>
+<li><p>调用<code>updateUserActivity:userInfo:</code>方法，传入userInfo参数。</p>
+</li>
+</ul>
+<ol start="2">
+<li>main interface controller</li>
+</ol>
+<ul>
+<li>实现<code>actionForUserActivity:context:</code>方法，根据传入的userInfo参数展示对应的interface controller，生产一个comtex对象并把它传入interface controller。</li>
+</ul>
+<h4 id="4-其他注意事项"><a href="#4-其他注意事项" class="headerlink" title="4.其他注意事项"></a>4.其他注意事项</h4><ul>
+<li>Glance底部区域是留给页面指示器圆点的。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:08:37.643Z" itemprop="dateUpdated">2019-01-20 19:08:37</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&title=《Apple Watchkit（Glance部分）》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&title=《Apple Watchkit（Glance部分）》 — Akring's Blog&source=Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Apple Watchkit（Glance部分）》 — Akring's Blog&url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/06/12/Mac OS 下字符串复制到剪贴板/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">iOS检测手机蜂窝网络制式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/28/Origami初步教程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Origami初步教程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&title=《Apple Watchkit（Glance部分）》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&title=《Apple Watchkit（Glance部分）》 — Akring's Blog&source=Glance在英语中的字面意思是（一瞥;一滑;闪光），由此可见在WatchKit的UI体系中，Glance担负的任务是为用户提供实时快捷，简单明了的信息获..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Apple Watchkit（Glance部分）》 — Akring's Blog&url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2016/04/08/Apple Watchkit（Glance部分）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqklEQVR42u3aS27cQAwFQN//0vY2QKzx48+ZAKWVAU0kVS+6mUd+fMTX58P1593X/+rvX07uLl94eHh4S5+evKx6PT3t9aK8xj+9BQ8PD++a9/Sap9/0DoZ8D88PmB8seHh4eG/Ae03Ny9+8XMbDw8P733nJL1+XuUmokdzFw8PD+7e8PKjNPzqJMHrxxEnWgoeHhxfz8pjgff4+6e/h4eHhjbvq+YabHyTJMz+XLjw8PLwLXjVyTSKGCbvaGIt+iYeHh/frvOrd6nafL02+QHh4eHjXvN14IgleJ+/qHRh4eHh4W7xqa6pa2vbK8XkzDA8PD++Ol2y7WwdDlXFSHOPh4eEdjAvk4UK1dN46hHpBMB4eHt4uL39QtciuFsqTIwEPDw/vd3h5I6paOm8dKr0hLTw8PLxrXq/dlbfqk9Gr+RJ88zQ8PDy8A15e2laHpfJPyQ+DHBYNE+Dh4eENeL2BgHnXaR5ARN+Ph4eHt8qbB7WjdQ0Cheog7A8zZXh4eHirvGSDHgUBcZlebY89lt14eHh4x7ytuCGPJMoNrWqEgYeHh3fAm7e4JuXv1iFRSFzw8PDwxrx8C84fXR2Zyj+9Ggrj4eHhXfDyQCEpuHvN/vwwyIt+PDw8vGvePHLtfWIPnJTjBTAeHh5eizcJHXojp3mYW405RuceHh4e3oA3b4bNy+6twh0PDw/vjpdv2ck4VLUgrga7zbgBDw8P7yzDzI+H5O98iiEvo6O7eHh4eAe83T22d/zkgWxvKfHw8PAuePNHV8OLpOCutscKk2V4eHh4S7xq0yuPDHaXoLooeHh4eO/JqwYK1X27N0yAh4eH9268wthTMfydBBaFHhoeHh7emJcUvpPotnoA9IauRlkLHh4eXsyr/od/68W9xVrr6eHh4eF1eF+ORGht5+9oqgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

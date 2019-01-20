@@ -152,10 +152,10 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-Swift中单例的正确写法" class="article-card article-type-post" itemprop="blogPost">
+            <article id="post-使用UIImageWriteToSavedPhotosAlbum保存图片到相册" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-04-07 17:52:53" datetime="2017-04-07T09:52:53.462Z" itemprop="datePublished">2017-04-07</time>
+        <time class="post-time" title="2012-11-10 15:20:31" datetime="2012-11-10T07:20:31.000Z" itemprop="datePublished">2012-11-10</time>
 
         
 
@@ -167,7 +167,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/07/Swift中单例的正确写法/">No title</a>
+      <a class="post-title-link" href="/2012/11/10/使用UIImageWriteToSavedPhotosAlbum保存图片到相册/">使用UIImageWriteToSavedPhotosAlbum保存图片到相册</a>
     </h3>
   
 
@@ -177,146 +177,17 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Swift中单例的正确写法
-12345678910import Cocoaclass UserInfoContex: NSObject &#123;        static let sharedInstance = UserInfoContex()        private override init() &#123;            &#125;&#125;
-
-通过设置初始化...
+        遇到项目中需要将网络获取的图片存到IOS设备的相册中的时候，可以使用UIImageWriteToSavedPhotosAlbum，方法如下：
     
 
-        <a href="/2017/04/07/Swift中单例的正确写法/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-带参字符串国际化的一种写法" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-04-07 17:51:30" datetime="2017-04-07T09:51:30.623Z" itemprop="datePublished">2017-04-07</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/07/带参字符串国际化的一种写法/">No title</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        带参字符串国际化的一种写法
-最近在为Star Order做中文本地化，其中涉及到对含参字符串做本地化的需求，参考写法如下:
-原句: Are you sure to rename XXX
-翻译句: 是否确定重命名 XXX
-
-XXX是一个字符串参数，用于接收传入的名称  
-
-代码如下:
-1234NSString *localizedString = NSLocalizedString(@"Ren...
-    
-
-        <a href="/2017/04/07/带参字符串国际化的一种写法/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Mac OS 下字符串复制到剪贴板" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-04-07 17:49:44" datetime="2017-04-07T09:49:44.675Z" itemprop="datePublished">2017-04-07</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/04/07/Mac OS 下字符串复制到剪贴板/">No title</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Mac OS 下字符串复制到剪贴板
-123456789101112/** 复制Clone地址到剪贴板  - parameter sender: */@IBAction func copyCloneAddressToPastBord(sender:NSButton) &#123;        let string = repoCloneLabel.stringValue    NSPaste...
-    
-
-        <a href="/2017/04/07/Mac OS 下字符串复制到剪贴板/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-3D Touch在Home Screen上的快捷菜单(一)" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-03-10 19:00:59" datetime="2016-03-10T11:00:59.000Z" itemprop="datePublished">2016-03-10</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/">3D Touch在Home Screen上的快捷菜单(一)</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        随着iOS9和iPhone 6s系列设备的发布，3D Touch为我们提供了一种新的交互方式。其中，通过Home Screen重压App图标来触发快捷菜单(Shortcut)的方式是非常实用的，它为用户提供了常用操作的快捷入口，能有效提升用户的使用体验。
-生成快捷方式的方法有静态生成和动态生成两种，可以根据使用情景选择合适的方式来实现。
-生成静态快捷方式
-在target的Info标签中，创建...
-    
-
-        <a href="/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/" class="post-more waves-effect waves-button">
+        <a href="/2012/11/10/使用UIImageWriteToSavedPhotosAlbum保存图片到相册/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 
     </div>
     

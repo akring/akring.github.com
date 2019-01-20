@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>iOS代码中使用十六进制颜色的方法 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Objective-C">
+    <meta name="description" content="简介在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本的红(RedColor)绿(GreenClolr)蓝(BlueColor)等，使用起来无法满足我们的需要，因此我们一般会使用其他的方式来设定颜色">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS代码中使用十六进制颜色的方法">
+<meta property="og:url" content="https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="简介在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本的红(RedColor)绿(GreenClolr)蓝(BlueColor)等，使用起来无法满足我们的需要，因此我们一般会使用其他的方式来设定颜色">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T11:15:51.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS代码中使用十六进制颜色的方法">
+<meta name="twitter:description" content="简介在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本的红(RedColor)绿(GreenClolr)蓝(BlueColor)等，使用起来无法满足我们的需要，因此我们一般会使用其他的方式来设定颜色">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">iOS代码中使用十六进制颜色的方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">iOS代码中使用十六进制颜色的方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2013-06-18T14:30:21.000Z" itemprop="datePublished" class="page-time">
+  2013-06-18
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用RGB颜色"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用RGB颜色</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用十六进制颜色代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用十六进制颜色代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小结"><span class="post-toc-number">4.</span> <span class="post-toc-text">小结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#鸣谢"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">鸣谢</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-IOS代码中使用十六进制颜色的方法" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">iOS代码中使用十六进制颜色的方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2013-06-18 22:30:21" datetime="2013-06-18T14:30:21.000Z" itemprop="datePublished">2013-06-18</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本的红(RedColor)绿(GreenClolr)蓝(BlueColor)等，使用起来无法满足我们的需要，因此我们一般会使用其他的方式来设定颜色</p>
+<a id="more"></a>
+<h2 id="使用RGB颜色"><a href="#使用RGB颜色" class="headerlink" title="使用RGB颜色"></a>使用RGB颜色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">UILabel *label;</span><br><span class="line">    </span><br><span class="line">[label setBackgroundColor:[UIColor colorWithRed:25/255 green:30/255 blue:70/255 alpha:1]];</span><br></pre></td></tr></table></figure>
+<p>以上代码中通过设定RGB来实现自定义颜色，其参数如下：</p>
+<ul>
+<li><p>[ ] Red:红色值，格式必须为xx/255，或者对应的小数，如：255/255 和 1具有相同的效果</p>
+</li>
+<li><p>[ ] green:绿色值，注意事项同上</p>
+</li>
+<li><p>[ ] blue:蓝色值，注意事项同上</p>
+</li>
+<li><p>[ ] alpha:透明度，介于0-1之间的小数</p>
+</li>
+</ul>
+<h2 id="使用十六进制颜色代码"><a href="#使用十六进制颜色代码" class="headerlink" title="使用十六进制颜色代码"></a>使用十六进制颜色代码</h2><p>在IOS代码中通过宏定义的方式，即可直接在程序中使用现成的十六进制代码，宏定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue &amp; 0xFF0000) &gt;&gt; 16))/255.0 green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 blue:((float)(rgbValue &amp; 0xFF))/255.0 alpha:1.0]</span><br></pre></td></tr></table></figure>
+<p>将以上宏定义加入到实现文件的头部，在程序中需要使用十六进制颜色代码时直接调用即可。以下例子中使用的颜色代码为：#EDEDED，语法格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UILabel *label;</span><br><span class="line"></span><br><span class="line">[label setBackgroundColor:UIColorFromRGB(0xEDEDED)];</span><br></pre></td></tr></table></figure>
+<p>以上代码中通过设定十六进制颜色代码来实现自定义颜色，其参数如下：</p>
+<ul>
+<li><p>[ ] UIColorFromRGB:即之前的宏定义</p>
+</li>
+<li><p>[ ] (0xEDEDED):即将颜色代码<code>#EDEDED</code>的<code>#</code>号替换为“0x”即可</p>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>通过以上方法，即可直接使用已经调好的十六进制颜色代码，省去了不断使用吸色器获取RGB颜色的过程，简化了代码，进而提高开发效率。</p>
+<h3 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h3><p>以上宏定义来自<a href="http://beyondvincent.com" target="_blank" rel="noopener">船哥</a>的一篇博文，使用后发现非常好用，故将使用心得贴出。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:15:51.636Z" itemprop="dateUpdated">2019-01-20 19:15:51</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&title=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&title=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&source=简介在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2013/09/30/用CGRect映射解决ScrollView上的TextField的键盘遮挡问题/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">用CGRect映射解决ScrollView上的TextField的键盘遮挡问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2013/01/30/新年前夕，来自苹果的礼物/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">新年前夕，来自苹果的礼物</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&title=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&title=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&source=简介在IOS开发过程中，用代码生成控件时经常需要涉及到为控件设定字体颜色，背景色等，IOS中为我们提供了UIColor类，但是其中包含的颜色仅只有一些基本..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS代码中使用十六进制颜色的方法》 — Akring's Blog&url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2013/06/18/IOS代码中使用十六进制颜色的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAAClUlEQVR42u3aS3LCQAwFQO5/6eQAlO0naURIVbOi+IynWXjEk16v+PHz9khev3r+/vmrK75/67XxwMPDwxtvPWHkmOp286vc7woPDw9vm5fcmu8/n2zxaoVk/epn8PDw8L6Td7XRatHcK+Xx8PDw/i8veSVfuVq44+Hh4f0Vr7p0fus/FXasZy14eHh4MS/vIn3P85X+Hh4eHt64q14NAnpRxfxouVwTDw8Pb4HXi1Pzd/OQIkeW94mHh4d3lDdZNIkn8oOhF/U+/HB4eHh4a7x5o+vsoEDenHu4Lh4eHt4Cb34jrr5eDR16YQceHh7eZ3j5gbERTyz27vDw8PA+yMtv2b2woFemHxi9wsPDwzvKSwLZ3oGRv94LNaIV8PDw8Ma83sXmBXceJVSDDDw8PLxt3qmFepFE/u590Vw+8fDw8PAGvHlwkLey8gMmDyOikhoPDw9vgVctcKvDT9Vgotpmeyij8fDw8BZ4SZE6afPPg9rmd/Hw8PDWeNVIYjKVMPl8+YjCw8PDW+Dd33yrw09nD4ZqBIyHh4f3SV4vtK122PLQdjJ0hYeHh7fNqzao8tt979bfi2sfZsrw8PDwFniThlbveOh1qfKfFQ8PD2+Pl5S2+Z//Sdmdl9rVkAIPDw9vj3dqHKpaKOcjC81GGh4eHt4arxdJVIcJJqRmCIKHh4e3xpsHDfORgpUHHh4e3gJsEkPMr9trdEXfxcPDw1vgzTeUj0P1JsJ6z/Hw8PC2eflh0Nv02auUQxM8PDy8NV41pMgHs3qjBr0w5cB5hYeHh7fAS4rsU4MF1Z8bDw8P7zt51TGC6mr5gRTtCg8PD2+N1xuWyuPXUytXjxM8PDy8DV7vD3/eEpsPwvaKcjw8PLwF3i/3LX2CJuTacwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

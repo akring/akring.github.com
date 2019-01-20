@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>QLPreviewController自定义Title的方法 | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Objective-C">
+    <meta name="description" content="一、创建自定义QLPreviewItem类">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QLPreviewController自定义Title的方法">
+<meta property="og:url" content="https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="一、创建自定义QLPreviewItem类">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T11:22:29.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QLPreviewController自定义Title的方法">
+<meta name="twitter:description" content="一、创建自定义QLPreviewItem类">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">QLPreviewController自定义Title的方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">QLPreviewController自定义Title的方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-20T08:20:31.000Z" itemprop="datePublished" class="page-time">
+  2015-12-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、创建自定义QLPreviewItem类"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、创建自定义QLPreviewItem类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、QLPreviewController的DataSource"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、QLPreviewController的DataSource</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-QLPreviewController自定义Title的方法" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">QLPreviewController自定义Title的方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-12-20 16:20:31" datetime="2015-12-20T08:20:31.000Z" itemprop="datePublished">2015-12-20</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、创建自定义QLPreviewItem类"><a href="#一、创建自定义QLPreviewItem类" class="headerlink" title="一、创建自定义QLPreviewItem类"></a>一、创建自定义QLPreviewItem类</h3><a id="more"></a>
+<ul>
+<li>QLPreviewCustomItem.h</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &lt;QuickLook/QuickLook.h&gt;</span><br><span class="line"></span><br><span class="line">@interface QLPreviewCustomItem : NSObject&lt;QLPreviewItem&gt;</span><br><span class="line"></span><br><span class="line">@property (readonly) NSString* previewItemTitle;</span><br><span class="line">@property (readonly) NSURL *previewItemURL;</span><br><span class="line"></span><br><span class="line">- (id) initWithTitle:(NSString*)title url:(NSURL*)url;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>QLPreviewCustomItem.m</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;QLPreviewCustomItem.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation QLPreviewCustomItem</span><br><span class="line"></span><br><span class="line">- (id) initWithTitle:(NSString*)title url:(NSURL*)url</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self != nil) &#123;</span><br><span class="line">        _previewItemTitle = title;</span><br><span class="line">        _previewItemURL   = url;</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h3 id="二、QLPreviewController的DataSource"><a href="#二、QLPreviewController的DataSource" class="headerlink" title="二、QLPreviewController的DataSource"></a>二、QLPreviewController的DataSource</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (id &lt;QLPreviewItem&gt;)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index</span><br><span class="line">&#123;   </span><br><span class="line">    QLPreviewCustomItem *item = [[QLPreviewCustomItem alloc]initWithTitle:_previewItem[@&quot;fileName&quot;] url:[NSURL fileURLWithPath:_previewItem[@&quot;filePath&quot;]]];</span><br><span class="line">    </span><br><span class="line">    return item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:22:29.009Z" itemprop="dateUpdated">2019-01-20 19:22:29</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&title=《QLPreviewController自定义Title的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&title=《QLPreviewController自定义Title的方法》 — Akring's Blog&source=一、创建自定义QLPreviewItem类" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《QLPreviewController自定义Title的方法》 — Akring's Blog&url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/28/QLPreviewController中文乱码的解决方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">QLPreviewController中文乱码的解决方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/28/POP框架开发浅析（一）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">POP框架开发浅析（一）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&title=《QLPreviewController自定义Title的方法》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&title=《QLPreviewController自定义Title的方法》 — Akring's Blog&source=一、创建自定义QLPreviewItem类" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《QLPreviewController自定义Title的方法》 — Akring's Blog&url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2015/12/20/QLPreviewController自定义Title的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3a3UrEMBAGUN//pRXEC0Fbv/nJ7gqnV6XWNCdCMs7M21t8vX9e9/dXT74/vx/n5zvJyAsXHh4eXmvqV1dC6i1TPvWr+dzPGQ8PD+80r3oYJMtxv0z5kZAvMR4eHt6r8e4Z8y3+flZ4eHh4/5GXJyDy5EIvlMfDw8N7BV4eIleR+eaev38k14KHh4cX87YKYI+8f0J9Dw8PDy/YXuch726TQXmGeHh4eAd494nU3lGRNw0Uphjgo+MBDw8Pb4k3n1ZyMMwTvskIZTAeHh5ekVfdmpOgeZJgTUbL2xrw8PDwHsmbh7y9Db36vPC/Ah4eHt4SL0Em7xc262CieeNCEsTj4eHhneD1Jjep4DenGB8bl39DPDw8vCVetS1ggqw2CqzlofHw8PAO8LaSs/PNPf+t6Ot4eHh4B3jJ1j9JrZ7rdygcGHh4eHirvOQwmICrQXAe3BfOPTw8PLxVXv753SA4D9YXmgnw8PDwVnlJMSlPofYSFr3Wq0JnBB4eHt4Sr1dkqjZL5WncrdaErxHw8PDwjvF6XVrJBv1Hn1ccplcXEQ8PD+8cb17oSqYexfXFBc1njoeHh7fL6236eVtAntRIymZ5OxceHh7eOd6kcSovX1XLY9Xg+4/v4uHh4R3gVZulesmCQoNUnK7Nf4qHh4d3gndf3JonICYjJPOMlgkPDw9viZeXl5KtudcikLdS5e1feHh4eI/hVctd1ee7x0PUqoWHh4e3ynsvXr3ge1Iey5fyl7nh4eHhHeDlVy9J0bvvjVY9SPDw8PAmvGqDVLUMNmkmyBfx8lt4eHh4x3j5YZCXpuaYeUsBHh4e3ivz5u9Uw+voyMHDw8N7Kq+3ieftCNXiWbSseHh4eMd4vY04L4xV36wW5AoRNx4eHt6Y1yuAVctR8xEmRxceHh7eEu8DDHvkKTYeTGkAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
