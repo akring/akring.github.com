@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>No title | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="iOS Moya 实现 OAuth 2.0 请求0. 起源开放授权（OAuth）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。而作为第三方软件，为用户提供 OAuth 登录是更好的选择，可以有效打消用户对于个人账户密码泄露的顾虑，同时也能有效避免用户反复登录，进而增加用户的舒适度，提高用户粘性。 1.">
+<meta name="keywords" content="iOS, Mac, Python, Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="iOS Moya 实现 OAuth 2.0 请求0. 起源开放授权（OAuth）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。而作为第三方软件，为用户提供 OAuth 登录是更好的选择，可以有效打消用户对于个人账户密码泄露的顾虑，同时也能有效避免用户反复登录，进而增加用户的舒适度，提高用户粘性。 1.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-20T10:57:47.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="iOS Moya 实现 OAuth 2.0 请求0. 起源开放授权（OAuth）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。而作为第三方软件，为用户提供 OAuth 登录是更好的选择，可以有效打消用户对于个人账户密码泄露的顾虑，同时也能有效避免用户反复登录，进而增加用户的舒适度，提高用户粘性。 1.">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-23T15:54:22.945Z" itemprop="datePublished" class="page-time">
+  2018-12-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS-Moya-实现-OAuth-2-0-请求"><span class="post-toc-number">1.</span> <span class="post-toc-text">iOS Moya 实现 OAuth 2.0 请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0-起源"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">0. 起源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-环境"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1. 环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-OAuth2-部分"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">2. OAuth2 部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Moya-部分"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">3. Moya 部分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">使用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-iOS Moya 实现 OAuth 2.0 请求" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-23 23:54:22" datetime="2018-12-23T15:54:22.945Z" itemprop="datePublished">2018-12-23</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="iOS-Moya-实现-OAuth-2-0-请求"><a href="#iOS-Moya-实现-OAuth-2-0-请求" class="headerlink" title="iOS Moya 实现 OAuth 2.0 请求"></a>iOS Moya 实现 OAuth 2.0 请求</h1><h2 id="0-起源"><a href="#0-起源" class="headerlink" title="0. 起源"></a>0. 起源</h2><p>开放授权（OAuth）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。<br>而作为第三方软件，为用户提供 OAuth 登录是更好的选择，可以有效打消用户对于个人账户密码泄露的顾虑，同时也能有效避免用户反复登录，进而增加用户的舒适度，提高用户粘性。</p>
+<h2 id="1-环境"><a href="#1-环境" class="headerlink" title="1. 环境"></a>1. 环境</h2><p>项目使用 MVVM 架构，引入了 Rx 全家桶，网络请求框架使用了 <a href="https://github.com/Moya/Moya" target="_blank" rel="noopener">Moya</a>，以及处理 Oauth 相关的库 <a href="https://github.com/p2/OAuth2" target="_blank" rel="noopener">OAuth2</a>。</p>
+<h2 id="2-OAuth2-部分"><a href="#2-OAuth2-部分" class="headerlink" title="2. OAuth2 部分"></a>2. OAuth2 部分</h2><p>参阅 OAuth2 库的<a href="https://github.com/p2/OAuth2" target="_blank" rel="noopener">README</a>，完成 OAuth 的信息配置：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> oauth2 = <span class="type">OAuth2CodeGrant</span>(settings: [</span><br><span class="line">    <span class="string">"client_id"</span>: <span class="string">"my_swift_app"</span>,</span><br><span class="line">    <span class="string">"client_secret"</span>: <span class="string">"C7447242"</span>,</span><br><span class="line">    <span class="string">"authorize_uri"</span>: <span class="string">"https://github.com/login/oauth/authorize"</span>,</span><br><span class="line">    <span class="string">"token_uri"</span>: <span class="string">"https://github.com/login/oauth/access_token"</span>,   <span class="comment">// code grant only</span></span><br><span class="line">    <span class="string">"redirect_uris"</span>: [<span class="string">"myapp://oauth/callback"</span>],   <span class="comment">// register your own "myapp" scheme in Info.plist</span></span><br><span class="line">    <span class="string">"scope"</span>: <span class="string">"user repo:status"</span>,</span><br><span class="line">    <span class="string">"secret_in_body"</span>: <span class="literal">true</span>,    <span class="comment">// Github needs this</span></span><br><span class="line">    <span class="string">"keychain"</span>: <span class="literal">false</span>,         <span class="comment">// if you DON'T want keychain integration</span></span><br><span class="line">] <span class="keyword">as</span> <span class="type">OAuth2JSON</span>)</span><br></pre></td></tr></table></figure></p>
+<p>同时因为 Moya 的底层网络请求实现是基于 Alamofire，因此我们可以参照 OAuth2 提供的说明文档 <a href="https://github.com/p2/OAuth2/wiki/Alamofire-4" target="_blank" rel="noopener">Alamofire 4 · p2/OAuth2 Wiki · GitHub</a> 完成相关配置，关键代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"><span class="keyword">import</span> OAuth2</span><br><span class="line"><span class="keyword">import</span> Alamofire</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OAuth2RetryHandler</span>: <span class="title">RequestRetrier</span>, <span class="title">RequestAdapter</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> loader: <span class="type">OAuth2DataLoader</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(oauth2: <span class="type">OAuth2</span>) &#123;</span><br><span class="line">        loader = <span class="type">OAuth2DataLoader</span>(oauth2: oauth2)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// Intercept 401 and do an OAuth2 authorization.</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">should</span><span class="params">(<span class="number">_</span> manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> response = request.task?.response <span class="keyword">as</span>? <span class="type">HTTPURLResponse</span>, <span class="number">401</span> == response.statusCode, <span class="keyword">let</span> req = request.request &#123;</span><br><span class="line">            <span class="keyword">var</span> dataRequest = <span class="type">OAuth2DataRequest</span>(request: req, callback: &#123; <span class="number">_</span> <span class="keyword">in</span> &#125;)</span><br><span class="line">            dataRequest.context = completion</span><br><span class="line">            loader.enqueue(request: dataRequest)</span><br><span class="line">            loader.attemptToAuthorize() &#123; authParams, error <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">self</span>.loader.dequeueAndApply() &#123; req <span class="keyword">in</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> comp = req.context <span class="keyword">as</span>? <span class="type">RequestRetryCompletion</span> &#123;</span><br><span class="line">                        comp(<span class="literal">nil</span> != authParams, <span class="number">0.0</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            completion(<span class="literal">false</span>, <span class="number">0.0</span>)   <span class="comment">// not a 401, not our problem</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// Sign the request with the access token.</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">adapt</span><span class="params">(<span class="number">_</span> urlRequest: URLRequest)</span></span> <span class="keyword">throws</span> -&gt; <span class="type">URLRequest</span> &#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="literal">nil</span> != loader.oauth2.accessToken <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> urlRequest</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">try</span> urlRequest.signed(with: loader.oauth2)   <span class="comment">// "try" added in 3.0.2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-Moya-部分"><a href="#3-Moya-部分" class="headerlink" title="3. Moya 部分"></a>3. Moya 部分</h2><p>Moya 的 provider 在初始化时可以传入 <code>SessionManager</code> ，因此参照文档，可以先使用 OAuth2 生成一个特定的 <code>SessionManager</code> ：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getManager</span><span class="params">()</span></span> -&gt; <span class="type">SessionManager</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> oauth2 = <span class="type">OAuth2CodeGrant</span>(settings: [</span><br><span class="line">            <span class="string">"client_id"</span>: <span class="string">"my_swift_app"</span>,</span><br><span class="line">            <span class="string">"client_secret"</span>: <span class="string">"C7447242"</span>,</span><br><span class="line">            <span class="string">"authorize_uri"</span>: <span class="string">"https://github.com/login/oauth/authorize"</span>,</span><br><span class="line">            <span class="string">"token_uri"</span>: <span class="string">"https://github.com/login/oauth/access_token"</span>,   <span class="comment">// code grant only</span></span><br><span class="line">            <span class="string">"redirect_uris"</span>: [<span class="string">"myapp://oauth/callback"</span>],   <span class="comment">// register your own "myapp" scheme in Info.plist</span></span><br><span class="line">            <span class="string">"scope"</span>: <span class="string">"user repo:status"</span>,</span><br><span class="line">            <span class="string">"secret_in_body"</span>: <span class="literal">true</span>,    <span class="comment">// Github needs this</span></span><br><span class="line">            <span class="string">"keychain"</span>: <span class="literal">false</span>,         <span class="comment">// if you DON'T want keychain integration</span></span><br><span class="line">            ] <span class="keyword">as</span> <span class="type">OAuth2JSON</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> sessionManager = <span class="type">SessionManager</span>()</span><br><span class="line">        <span class="keyword">let</span> oauthHandler = <span class="type">OAuth2Handler</span>(oauth2: oauth2)</span><br><span class="line">        sessionManager.adapter = oauthHandler</span><br><span class="line">        sessionManager.retrier = oauthHandler</span><br><span class="line">        <span class="keyword">return</span> sessionManager</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>进而生成带 OAuth 的 provider：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fileprivate</span> <span class="built_in">lazy</span> <span class="keyword">var</span> provider: <span class="type">MoyaProvider</span> = &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="type">MoyaProvider</span>&lt;<span class="type">API</span>&gt;(manager: <span class="keyword">self</span>.getManager(), plugins: [<span class="type">NetworkLoggerPlugin</span>()])</span><br><span class="line">    &#125;()</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用生成的 <code>provider</code>发送请求即可，此时 Moya 可自动处理 OAuth 认证信息。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T10:57:47.804Z" itemprop="dateUpdated">2019-01-20 18:57:47</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&title=Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&title=Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Akring's Blog&url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/17/hello-world/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/05/Swift Lint 的配置和使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&title=《No title》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&title=《No title》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Akring's Blog&url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2018/12/23/iOS Moya 实现 OAuth 2.0 请求/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQXLDIAwF0Nz/0u1Mtx3b/wtIsnisMq0DPC9AkfR6xePnb/z/nDzz//n7J5P5Nw88PDy80davRrJwvon2v8l+rp7Bw8PDO81LDvr75fPZ2hmWVsHDw8P7KC+hJoB207OwHg8PD+97eEmwO3tNeTICDw8P7xt4STLiHpbw8qD5A7kWPDw8vJi3UgD71Oc31ffw8PDwyqp6cuC+s6BV7xYPDw/vAK9NK+TlqzzszkP5did4eHh4p3n58m1Za7bR9pq5fBIPDw9vKy/fepLYbZ9Mil5t4vjhFwMeHh7eMm+lwN9eJO2L23wJ4eHh4W3i5YHvrJlg1j6Vp48fLhU8PDy8A7zZYm24PAvT23Tt5Tx4eHh4x3htS1MOzgFtyjjC4+Hh4W3lzYLXPMWQpxLydEYRM+Ph4eEd4OVFqbwEtav5oE2I1J0ReHh4eCNenpZd2UqROBjNfMnGw8PDO8Brj912o3nQvBLWF01XeHh4eMu8duq2fSo/6FdmeAip8fDw8I7x8gXWEwp5lnVpP3h4eHiHebMp1v/+KkfxOvDw8PAO8PKWpvywzstgyYp52neppwwPDw8v5p0IoNv2rPWURPGLAQ8PD2+ZNytuta1X99/NC1rt9YCHh4d3jpcskKcJ2uskb1YYtiDg4eHhbeXlB+7KtTHrBZslMvDw8PA+xVuZur0MkmRx+61hRI+Hh4cX8JKDPi+Dza6ZPAQvMit4eHh4x3g/5UjC6zY0z9MTbVMXHh4e3glePlbSDW0hrW29yoNvPDw8vF28/DKYhcIrM88uADw8PLz38Nr0xKylIP97u0rRTYaHh4f3Rt6uctT9M7MkyOWKeHh4eF/Ay7ebHP1JGrd9BcOQGg8PD6/k5SmDDVnhIPjOX8FDII6Hh4d3gDf7kT9rODiXIN7wXvHw8PCeeb+MWwMn1C+emAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

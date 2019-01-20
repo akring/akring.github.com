@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>No title | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="新年前夕，来自苹果的礼物 在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹果在我本命年前送来的一份礼物吧，虽然过程充满曲折和艰辛，但总算是迈出了第一步。在此也顺便分享一下从这次曲折的审核汲取的经验和教训。">
+<meta name="keywords" content="iOS, Mac, Python, Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="新年前夕，来自苹果的礼物 在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹果在我本命年前送来的一份礼物吧，虽然过程充满曲折和艰辛，但总算是迈出了第一步。在此也顺便分享一下从这次曲折的审核汲取的经验和教训。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://akring-blog-image.qiniudn.com/2014.1.29/blog/1.png">
+<meta property="og:updated_time" content="2017-04-19T07:49:29.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="新年前夕，来自苹果的礼物 在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹果在我本命年前送来的一份礼物吧，虽然过程充满曲折和艰辛，但总算是迈出了第一步。在此也顺便分享一下从这次曲折的审核汲取的经验和教训。">
+<meta name="twitter:image" content="http://akring-blog-image.qiniudn.com/2014.1.29/blog/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-07T10:03:18.556Z" itemprop="datePublished" class="page-time">
+  2017-04-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#新年前夕，来自苹果的礼物"><span class="post-toc-number">1.</span> <span class="post-toc-text">新年前夕，来自苹果的礼物</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A、熟悉规则是成功的开始"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">A、熟悉规则是成功的开始</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#B、良好的后勤保障是成功的基石"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">B、良好的后勤保障是成功的基石</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C、细节决定成败"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">C、细节决定成败</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-新年前夕，来自苹果的礼物" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-07 18:03:18" datetime="2017-04-07T10:03:18.556Z" itemprop="datePublished">2017-04-07</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="新年前夕，来自苹果的礼物"><a href="#新年前夕，来自苹果的礼物" class="headerlink" title="新年前夕，来自苹果的礼物"></a>新年前夕，来自苹果的礼物</h1><p><img src="http://akring-blog-image.qiniudn.com/2014.1.29/blog/1.png" alt="image"></p>
+<p>在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹果在我本命年前送来的一份礼物吧，虽然过程充满曲折和艰辛，但总算是迈出了第一步。<br>在此也顺便分享一下从这次曲折的审核汲取的经验和教训。</p>
+<a id="more"></a>
+<h2 id="A、熟悉规则是成功的开始"><a href="#A、熟悉规则是成功的开始" class="headerlink" title="A、熟悉规则是成功的开始"></a>A、熟悉规则是成功的开始</h2><p>苹果为开发者提供了一份详细的审核文档:<a href="http://akring-blog-image.qiniudn.com/2014.1.29/blog/%E6%9C%80%E6%96%B02013%E5%B9%B4Appstore%E5%BA%94%E7%94%A8%E5%AE%A1%E6%A0%B8%E6%8C%87%E5%8D%97.doc" target="_blank" rel="noopener">2013最新审核规则</a> 建议所有准备提交审核的工程师们都仔细逐条的阅读，不要嫌麻烦，否则将来可能会给你的审核带来很多问题。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 例子：之前因为阅读文档不仔细，没有注意到苹果对程序内图标的限制，最终因为我使用了一个类似系统APP的方形圆角图标而被拒，这是第一次应用被拒。</li>
+</ul>
+<h2 id="B、良好的后勤保障是成功的基石"><a href="#B、良好的后勤保障是成功的基石" class="headerlink" title="B、良好的后勤保障是成功的基石"></a>B、良好的后勤保障是成功的基石</h2><p>在应用进入“In review”阶段之后，与APP相关的一切都要尽力维持稳定，包括但不限于数据库，服务器等等，如果使用类似云服务器等设备，需要特别关注在审核期间提供商是否有维护或其他可能导致app与服务器无法连接的活动，尽力避免因一些意外情况导致审核失败。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 例子：我的app后两次审核失败均是由于“In review”期间服务器崩溃，导致app无法连接服务器，被苹果审核组判定为存在致命bug，直接被拒。（另：不知苹果是否会进行压力测试，怀疑服务器崩溃与此有关）。</li>
+</ul>
+<h2 id="C、细节决定成败"><a href="#C、细节决定成败" class="headerlink" title="C、细节决定成败"></a>C、细节决定成败</h2><p>在严格遵循APP Store的审核规则之余，还需要注意一些细枝末节的细节问题，否则很可能阴沟里翻船。</p>
+<ul>
+<li><p>[x] 例子1：如果app需要登录以后才能测试和操作，那么切记：一定要提供测试帐号！，不要以为“我有提供注册功能啊！”而忽视这个问题，苹果的老爷们是不会乖乖按照你预想的流程来测试的，所以如果你忘了，那么只能下次再来了.</p>
+</li>
+<li><p>[x] 例子2：当app内涉及到一些你或你公司独有的流程的时候，例如你们有一个自己的积分系统，苹果审核人员可能会因为搞不明白积分从何而来，通过什么样的方法可以获得积分，积分有什么用等等而需要你提供一些说明信息，千万不要以为自己的应用是被拒了，这时候只需要提供一个详细说明，审核流程依然会继续往下走的。最好是在提交审核的时候在附加信息里提前注明，有备无患。</p>
+</li>
+</ul>
+<p>最后说下申诉，申诉的速度比较慢，所以在申诉之前要先考虑好，如果比较有把握就提交申诉，如果确实是自己的问题建议不要抱有侥幸心理理，重新上传程序吧，等待申诉的时间也会耗去大约3-5天，抱有侥幸心理除了拖长审核周期以外没有任何帮助。</p>
+<p>以上就是本次审核所获得的经验，与大家共享。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-04-19T07:49:29.730Z" itemprop="dateUpdated">2017-04-19 15:49:29</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&title=Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&title=Akring's Blog&source=新年前夕，来自苹果的礼物
+在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Akring's Blog&url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/07/Apple Watchkit（Glance部分）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/07/ZXING二维码实现重复扫描/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&title=《No title》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&title=《No title》 — Akring's Blog&source=新年前夕，来自苹果的礼物
+在折腾了快2个月，先后因为各种原因被拒3次之后，我的第一个APP终于在APP Store上线了。再过两天就是马年新年了，也算是苹..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Akring's Blog&url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/新年前夕，来自苹果的礼物/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvklEQVR42u3awY7iQAwE0Pn/n2alPa3EEqrs9MDh5YQYJuQ1Utsq989PfD3+Xs/v/Pv+4+m6vturzzzf89Uz3Hbh4eHhjR791XV961fs6/vvlzh5Zjw8PLzTvHyDzr8yuU9eQmbLjYeHh/dZ3vWXRdt0uXBte42Hh4f3bbxZYNFmBZtgAg8PD+83efnWn/zX9ePmzXfy19uyFjw8PLyuy60j1M++Pjjfw8PDw1tM1dtSsQ8m8hFa9Jx4eHh4B3jJEag2pEiGVW0j3t7/zT/g4eHhLXing4OkkLSxbFFs8PDw8I7xZgHEvvFNtvvND4CHh4d3mpePmmbb+mY58mUdZs94eHh4C17+oNfx636xNlQ8PDy807y8nU0iiTZ+zZe4bejx8PDwTvDaAVj+mdmBgE0UEpUHPDw8vDUvj0rzhngfEOf3rFtqPDw8vFt5s1g2PwKVF4a87X7z7Xh4eHgHeHc1r/kCtcOwNuaoDxDg4eHhrXlt5DoLL/LhVhsfvykMeHh4eLfy2qZ21nDnxxHyI1Z4eHh438Cbtdr7oVdecooWHw8PD+8Abx8QJCO0/P1ZCXmzQHh4eHg38Wbj/3ZAlZNmB15fvsbDw8M7xpttu+3RqxODtDcLhIeHh3eMNysJRRAwOkCQjM3e/CR4eHh4B3htWzz7gnb8P7tDkVLj4eHhrXltGDE7LtAeQchHZcOBGR4eHt6C1x5+ao9nbbb1zZEvPDw8vN/hbepJ2y5vRmWrMBcPDw9vwXuUVx713hU0zEINPDw8vHO8zabfhg7FYamy2ORtNx4eHt5dvKQYtJHu6YUrigEeHh7eMV4bLrSBwqyNzhcIDw8P75t5CXK2ZEnRuib95z54eHh4H+WdCHbzsjH7PB4eHt45XhJG5AP+dhNvl+9I1oKHh4e3nqfPhv15YdgUkpuReHh4eCnvDwidnHFCjT1kAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

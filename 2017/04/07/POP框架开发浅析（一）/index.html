@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>No title | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="POP框架开发浅析（一）一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和阴影的合理使用能够极大的提升APP的手感和吸引力，因此，学习iOS下的动画开发就显得非常有必要了。">
+<meta name="keywords" content="iOS, Mac, Python, Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="POP框架开发浅析（一）一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和阴影的合理使用能够极大的提升APP的手感和吸引力，因此，学习iOS下的动画开发就显得非常有必要了。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-04-18T15:39:27.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="POP框架开发浅析（一）一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和阴影的合理使用能够极大的提升APP的手感和吸引力，因此，学习iOS下的动画开发就显得非常有必要了。">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-07T09:57:14.194Z" itemprop="datePublished" class="page-time">
+  2017-04-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#POP框架开发浅析（一）"><span class="post-toc-number">1.</span> <span class="post-toc-text">POP框架开发浅析（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初识POP"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">初识POP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装与集成"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">安装与集成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引入头文件"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">引入头文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动画类型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">动画类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring-Animation-跳跃动画"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Spring Animation(跳跃动画)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Decay-Animation-衰减动画"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Decay Animation(衰减动画)</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-POP框架开发浅析（一）" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-07 17:57:14" datetime="2017-04-07T09:57:14.194Z" itemprop="datePublished">2017-04-07</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="POP框架开发浅析（一）"><a href="#POP框架开发浅析（一）" class="headerlink" title="POP框架开发浅析（一）"></a>POP框架开发浅析（一）</h1><p>一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和阴影的合理使用能够极大的提升APP的手感和吸引力，因此，学习iOS下的动画开发就显得非常有必要了。</p>
+<a id="more"></a>
+<h2 id="初识POP"><a href="#初识POP" class="headerlink" title="初识POP"></a>初识POP</h2><p>POP是由Facebook开源的一款动画引擎，曾被用于开发Facebook Paper，其特性可被概括为<strong>生动流畅，简单易用</strong>。通过POP引擎，我们可以为用户创造出逼真而充满物理效应的动效体验。</p>
+<h3 id="安装与集成"><a href="#安装与集成" class="headerlink" title="安装与集成"></a>安装与集成</h3><p>POP可以通过Cocoapods或手动配置的方式集成到项目中，个人建议使用cocoapods的方式，其pod命令为：pod ‘pop’。未使用cocoapod的同学可以前往POP的<a href="https://github.com/facebook/pop" target="_blank" rel="noopener">Github页面</a>下载Zip压缩包后自行配置与集成。</p>
+<h3 id="引入头文件"><a href="#引入头文件" class="headerlink" title="引入头文件"></a>引入头文件</h3><p>在项目中使用POP仅需引入POP.h头文件即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;pop/POP.h&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="动画类型"><a href="#动画类型" class="headerlink" title="动画类型"></a>动画类型</h2><p>POP默认提供两种动画类型——Spring和Decay，而在此基础上每种类型中又包含了多种动画模式。</p>
+<h3 id="Spring-Animation-跳跃动画"><a href="#Spring-Animation-跳跃动画" class="headerlink" title="Spring Animation(跳跃动画)"></a>Spring Animation(跳跃动画)</h3><p>Spring单词的其中一个含义是弹簧，由此可见此类动画的主要特征就是像弹簧一般可以来回弹动，利用Spring Animation，我们可以创造出富有动感且符合物理规律的动画效果。<br>Spring Animation包含了以下5个主要参数；</p>
+<ol>
+<li>Bounciness(反弹)</li>
+</ol>
+<p>反弹主要影响动画所作用的参数的变化幅度，例如用作缩放动画时，可调节缩放的范围比例。</p>
+<ol start="2">
+<li>Speed(速度)</li>
+</ol>
+<p>速度主要影响动画作用的时间，速度越慢，则动画从开始到结束所需的时间越长。</p>
+<ol start="3">
+<li>Tension(拉力)</li>
+</ol>
+<p>拉力主要影响动画弹动的力度及速度，拉力越大则动画执行起来越干净利落，拉力越小则动画执行起来越和缓平滑，具体效果需自行调试后才能有直观的感受。</p>
+<ol start="4">
+<li>Friction(摩擦力)</li>
+</ol>
+<p>摩擦力参数启用后，动画会不断重复，并且幅度逐渐削弱，直到停止，其效果类似于从桌上推落一只皮球，落地后不断弹起——落下，直至最终静止于地面的过程。摩擦力越大，则动画幅度削弱的越快，从开始到停止的时间也就越短。</p>
+<ol start="5">
+<li>Mass(质量)</li>
+</ol>
+<p>质量会细微地影响动画的回弹力度和速度，在开启摩擦力参数时效果最为明显。</p>
+<blockquote>
+<p>各参数之间常会互相作用，建议大家都通过控制变量法，在demo上实际观察各项参数对动画效果的影响。</p>
+</blockquote>
+<h3 id="Decay-Animation-衰减动画"><a href="#Decay-Animation-衰减动画" class="headerlink" title="Decay Animation(衰减动画)"></a>Decay Animation(衰减动画)</h3><p>Decay Animation可以实现衰减的动画效果，其效果类似于汽车刹车，等同于物理概念中的匀变速运动。Decay Animation有一个非常重要的参数——velocity(速率)，其作用等同于物理匀变速运动公式中的加速度a。<br>例如：要创建一个物体移动的动画，那么我们可以为其X方向值设定初始值fromValue，然后设定速率velocity，则动画会从初始值以velocity的速率变化。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-04-18T15:39:27.002Z" itemprop="dateUpdated">2017-04-18 23:39:27</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&title=Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&title=Akring's Blog&source=POP框架开发浅析（一）一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Akring's Blog&url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/07/Mac下的切图神器——Slicy使用说明/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/07/修改UISearchBar输入框背景的方法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&title=《No title》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&title=《No title》 — Akring's Blog&source=POP框架开发浅析（一）一直以来都比较纠结于iOS上的动画效果开发，平铺直叙的交互效果在当今扁平化遍地开花的年代显得太过苍白。私以为在扁平化设计中，动效和..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Akring's Blog&url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/POP框架开发浅析（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACo0lEQVR42u3aQW4DMQgF0Nz/0u22UjrTD5hoKj2voiT1+LmSTYDXKx5fP0b+Tj5b8mkyc3Pg4eHhDZb+Pt6nviLd/+3VDPOtvHouHh4e3jbv6jHV78yvinxb79eDh4eH9xzeqaO/ulA8PDy8/8jrXSFX7+SBMh4eHt4zeXlCoZeMSL6fjMVcCx4eHl7My6tIz3m9Ut/Dw8PDG1fVJ6nV6px5QF+YGQ8PD2+B1wuL89aoXnjdawK7TEng4eHhLfNOFfUnbQS9IhweHh7eJ3n5x71DP+fl188o+4KHh4d39IRMFpS8Uy2w3V8qvS3Gw8PD2+ZVE6y9tO+pSyV6Fh4eHt5HeNUUQF7aP9UoUEiC4OHh4S3wqsmIapL31Nb0EiV4eHh4G7xThat5emJ+MfyyWjw8PLwF3iTNGiVSB1fCJNlxIIuMh4eHFwfQveXm29QruY1aH/Dw8PCO8iahcDVEzhOv+UUVBdN4eHh4C7xqSanXXjAvid3jL288PDw8vKO85NCvTp0ExL1Dv9pAgIeHh/cZXvXx1bC416ZwoAUBDw8P7yjv1AGdLy4P3+ftCHh4eHjbvLxRIC/eT1IS1TC9mXvGw8PDi3lVQN6SlV8weaNA/m/Aw8PD2+P1fvZXG6e+4tH7fmFz8fDw8A7xqkdtrwWqWjCbrwEPDw9vm3c2sM5bDaqtAM3KHh4eHt4CL0/I5k1U1eB7ZeDh4eEtwOY//nvbNE9q/HH94OHh4S3wnnDG5k1dvbAbDw8Pb4NXLUpV2XkV7n4LmhcDHh4e3hpv0kaQB9CTQLyaIsHDw8N7Gm8SNE+2Jk9n4OHh4T2HN0nd5qFz3ojwxzbh4eHhrfHyZESv0WqeyOhtFh4eHt4Gr9eYlV8n1WA6v34ONA3g4eHh1eb8Bhiy/itc3NXXAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

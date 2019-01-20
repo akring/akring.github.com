@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>3D Touch在Home Screen上的快捷菜单(一) | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="iOS,Swift">
+    <meta name="description" content="随着iOS9和iPhone 6s系列设备的发布，3D Touch为我们提供了一种新的交互方式。其中，通过Home Screen重压App图标来触发快捷菜单(Shortcut)的方式是非常实用的，它为用户提供了常用操作的快捷入口，能有效提升用户的使用体验。 生成快捷方式的方法有静态生成和动态生成两种，可以根据使用情景选择合适的方式来实现。 生成静态快捷方式 在target的Info标签中，创建一个A">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D Touch在Home Screen上的快捷菜单(一)">
+<meta property="og:url" content="https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="随着iOS9和iPhone 6s系列设备的发布，3D Touch为我们提供了一种新的交互方式。其中，通过Home Screen重压App图标来触发快捷菜单(Shortcut)的方式是非常实用的，它为用户提供了常用操作的快捷入口，能有效提升用户的使用体验。 生成快捷方式的方法有静态生成和动态生成两种，可以根据使用情景选择合适的方式来实现。 生成静态快捷方式 在target的Info标签中，创建一个A">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/3D-TouchQQ20151012-0@2x.png">
+<meta property="og:updated_time" content="2019-01-20T11:05:40.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3D Touch在Home Screen上的快捷菜单(一)">
+<meta name="twitter:description" content="随着iOS9和iPhone 6s系列设备的发布，3D Touch为我们提供了一种新的交互方式。其中，通过Home Screen重压App图标来触发快捷菜单(Shortcut)的方式是非常实用的，它为用户提供了常用操作的快捷入口，能有效提升用户的使用体验。 生成快捷方式的方法有静态生成和动态生成两种，可以根据使用情景选择合适的方式来实现。 生成静态快捷方式 在target的Info标签中，创建一个A">
+<meta name="twitter:image" content="http://7bv8xb.com1.z0.glb.clouddn.com/3D-TouchQQ20151012-0@2x.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">3D Touch在Home Screen上的快捷菜单(一)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">3D Touch在Home Screen上的快捷菜单(一)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-10T11:00:59.000Z" itemprop="datePublished" class="page-time">
+  2016-03-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成静态快捷方式"><span class="post-toc-number">1.</span> <span class="post-toc-text">生成静态快捷方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置快捷键的系统回调"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置快捷键的系统回调</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-3D Touch在Home Screen上的快捷菜单(一)" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">3D Touch在Home Screen上的快捷菜单(一)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-10 19:00:59" datetime="2016-03-10T11:00:59.000Z" itemprop="datePublished">2016-03-10</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>随着iOS9和iPhone 6s系列设备的发布，3D Touch为我们提供了一种新的交互方式。其中，通过Home Screen重压App图标来触发快捷菜单(Shortcut)的方式是非常实用的，它为用户提供了常用操作的快捷入口，能有效提升用户的使用体验。</p>
+<p>生成快捷方式的方法有<code>静态生成</code>和<code>动态生成</code>两种，可以根据使用情景选择合适的方式来实现。</p>
+<h3 id="生成静态快捷方式"><a href="#生成静态快捷方式" class="headerlink" title="生成静态快捷方式"></a>生成静态快捷方式</h3><ol>
+<li><p>在<code>target</code>的<code>Info</code>标签中，创建一个<code>Array</code>类型的值<code>UIApplicationShortcutItems</code>。</p>
+</li>
+<li><p>在<code>UIApplicationShortcutItems</code>下创建类型为<code>Dictionary</code>的Item，每个Item都对应一个快捷键选项。</p>
+</li>
+<li><p>为Item创建三个键值对，分别为：</p>
+<p><code>UIApplicationShortcutItemTitle</code>：<code>标题字符串</code><br><code>UIApplicationShortcutItemIconType</code>：<code>系统自带的图标类型</code><br><code>UIApplicationShortcutItemType</code>：<code>快捷键的标示符字符串</code></p>
+<blockquote>
+<p>如需自定义图标，则使用这个键值对:<code>UIApplicationShortcutItemIconFile</code>:<code>项目中的图片文件名</code></p>
+</blockquote>
+</li>
+</ol>
+<p>创建好的Item示例如下:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7bv8xb.com1.z0.glb.clouddn.com/3D-TouchQQ20151012-0@2x.png" alt="key" title="">
+                </div>
+                <div class="image-caption">key</div>
+            </figure></p>
+<h3 id="配置快捷键的系统回调"><a href="#配置快捷键的系统回调" class="headerlink" title="配置快捷键的系统回调"></a>配置快捷键的系统回调</h3><p>用户点击快捷键之后，将在Appdelegate中触发<code>- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler</code>回调，从而使得我们可以针对触发的快捷键进行操作，示例代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application performActionForShortcutItem:(<span class="built_in">UIApplicationShortcutItem</span> *)shortcutItem completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">BOOL</span>))completionHandler&#123;</span><br><span class="line">   </span><br><span class="line">   completionHandler([<span class="keyword">self</span> handleShortCutItem:shortcutItem]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据苹果官方文档的建议，我们需要将快捷键的操作抽取成一个单独的方法，以便我们在<code>didFinishLaunchingWithOptions</code>和<code>performActionForShortcutItem</code>回调中解析快捷键操作，抽取出的解析方法如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  处理来自Home Screen的快捷键操作</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @param shortcutItem 快捷键选项</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @return Bool</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)handleShortCutItem:(<span class="built_in">UIApplicationShortcutItem</span> *)shortcutItem &#123;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">if</span> (shortcutItem == <span class="literal">nil</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="comment">//快捷键1</span></span><br><span class="line">      <span class="keyword">if</span> ([shortcutItem.type isEqualToString:<span class="string">@"xxx"</span>]) &#123;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//执行快捷键1的操作</span></span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//快捷键2</span></span><br><span class="line">      <span class="keyword">if</span> ([shortcutItem.type isEqualToString:<span class="string">@"xxx"</span>]) &#123;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//执行快捷键2的操作</span></span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//快捷键3</span></span><br><span class="line">      <span class="keyword">if</span> ([shortcutItem.type isEqualToString:<span class="string">@"xxx"</span>]) &#123;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">//执行快捷键3的操作</span></span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-01-20T11:05:40.236Z" itemprop="dateUpdated">2019-01-20 19:05:40</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&title=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&title=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/07/Mac OS 下字符串复制到剪贴板/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&title=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&title=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&source=iOS / Mac Developer" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《3D Touch在Home Screen上的快捷菜单(一)》 — Akring's Blog&url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2016/03/10/3D Touch在Home Screen上的快捷菜单(一)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3awW7kIBAE0Pz/T0+k1R5ywapqIPHh+TQaeQzPkaBTzddXfH3+XatvPj+u1f2rZz7/dnXP4QsPDw9vNPXV9Tzd53tW3yRPe35+Mmc8PDy827x86iv8M+Z5lPyefM54eHh4b+DlC3e+MSSvJhkLDw8P7528nW1jPyXAw8PDexsvGWY4wCi0/YOsBQ8PDy/mtQ2wN3y+2N/Dw8PD2+iqJ9dOUd6+0HpueHh4eBd4STu/HT4PMmYbQH3ACw8PD+8Cr530LBS4EWTkjTc8PDy8s7z9GLfdBhLY/vECPDw8vN/h5QV3G0DMtpn90h8PDw/vBm9W2rbBawKYvYgaj4eHh7fBa/+xn5W2bUjRxrjLUfDw8PAu8Np/7GdxQBvs7r+CYd8MDw8Pb9RPT5b1Wcg7i4BnpT8eHh7ePV4eLrShwH7jalamFwdV8fDw8Ea8duHe34VmcUOOXIa5eHh4eId4+WHT2YtIwtazvbvl3w0PDw/vEC+5qSheY0a+PewEvnh4eHg3eLOp568jYQ8X9+TJeHh4eBd4p9pdp0Lh2dGBaHvAw8PDO8prY9Y2tE0K5WTbOHAYCw8PD+8Crz0okNw5a4zNCv0CiYeHh7fBa5fXvD0222xmUUgdRuDh4eFt8GZLfBI67ES6s4IbDw8P7/d57QBtqDqbYrsV1V07PDw8vJK3f0Q1DxHyGLctoJe/xcPDw7vGywvTfJ/ZKX9no+Dh4eHd5n3Kaz/SzV/oTizy/xs8PDy8C7z9YKKNdGdFdvL5Su6Ch4eHF4QRyeLbFruzQwB56YyHh4f3V7x8WW8X91njaj/ywMPDw3szL49uZ7FC22bDw8PDew9v52jp7PBBfrzgQEmNh4eHV/KSCc0aV7OiPC+4o5IaDw8P7yivDWQTaru4z/p1x5B4eHh46ay+ARc3aG2Sao1pAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

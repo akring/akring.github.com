@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>No title | Akring&#39;s Blog | Everything is permitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="AutoLayout动态隐藏控件的方法使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目前网上有关AutoLayout的教程大都浅尝辄止，或者仅涉及到对设备的横、竖屏的动态布局等比较简单的应用，而对AutoLayout做动态界面相关的内容却非常少，因此结合日常工作中的一些经验，来为大家做一些分享。">
+<meta name="keywords" content="iOS, Mac, Python, Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/index.html">
+<meta property="og:site_name" content="Akring&#39;s Blog">
+<meta property="og:description" content="AutoLayout动态隐藏控件的方法使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目前网上有关AutoLayout的教程大都浅尝辄止，或者仅涉及到对设备的横、竖屏的动态布局等比较简单的应用，而对AutoLayout做动态界面相关的内容却非常少，因此结合日常工作中的一些经验，来为大家做一些分享。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://akring-blog-image.qiniudn.com/Autolayout%E5%8A%A8%E6%80%81GifDemo.gif">
+<meta property="og:image" content="http://akring-blog-image.qiniudn.com/Autolayout动态FirstStep.png">
+<meta property="og:image" content="http://akring-blog-image.qiniudn.com/Autolayout%E5%8A%A8%E6%80%81SecondStep.png">
+<meta property="og:updated_time" content="2017-04-19T07:56:20.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="AutoLayout动态隐藏控件的方法使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目前网上有关AutoLayout的教程大都浅尝辄止，或者仅涉及到对设备的横、竖屏的动态布局等比较简单的应用，而对AutoLayout做动态界面相关的内容却非常少，因此结合日常工作中的一些经验，来为大家做一些分享。">
+<meta name="twitter:image" content="http://akring-blog-image.qiniudn.com/Autolayout%E5%8A%A8%E6%80%81GifDemo.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="Akring&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Akring</h5>
+          <a href="mailto:ddflj3210@gmail.com" title="ddflj3210@gmail.com" class="mail">ddflj3210@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/akring" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-04-07T09:55:33.583Z" itemprop="datePublished" class="page-time">
+  2017-04-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AutoLayout动态隐藏控件的方法"><span class="post-toc-number">1.</span> <span class="post-toc-text">AutoLayout动态隐藏控件的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#我们要做什么"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">我们要做什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作步骤"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">操作步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#附录"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">附录</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-AutoLayout动态隐藏控件的方法" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-04-07 17:55:33" datetime="2017-04-07T09:55:33.583Z" itemprop="datePublished">2017-04-07</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="AutoLayout动态隐藏控件的方法"><a href="#AutoLayout动态隐藏控件的方法" class="headerlink" title="AutoLayout动态隐藏控件的方法"></a>AutoLayout动态隐藏控件的方法</h1><p>使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目前网上有关AutoLayout的教程大都浅尝辄止，或者仅涉及到对设备的横、竖屏的动态布局等比较简单的应用，而对AutoLayout做动态界面相关的内容却非常少，因此结合日常工作中的一些经验，来为大家做一些分享。</p>
+<a id="more"></a>
+<h3 id="我们要做什么"><a href="#我们要做什么" class="headerlink" title="我们要做什么"></a>我们要做什么</h3><p>相信很多开发者都需要解决这样一系列问题：</p>
+<ul>
+<li>我们需要根据用户操作，或服务端返回的数据，而动态显示/隐藏一些控件，以达到灵活布局的效果。</li>
+<li>我们需要根据需要调整某一控件的尺寸大小，位置信息，以输出最适宜的界面布局。</li>
+</ul>
+<p>面对类似高动态的界面实现时，以往我们的方法是通过代码来计算和判定控件的大小和位置，并结合控件的<code>hidden</code>,<code>frame</code>等属性对其进行设置，在实际使用中往往需要进行比较复杂的计算，比较繁琐。抛开代码党和xib党的争论，下面介绍一种使用AutoLayout实现动态界面的方法。</p>
+<p><img src="http://akring-blog-image.qiniudn.com/Autolayout%E5%8A%A8%E6%80%81GifDemo.gif" alt="动态示例图"><br>如示例图所示，我们将要构建一个由三个控件构成的简易应用，通过底部的<code>show</code>和<code>hide</code>按钮，控制第二个组件<code>SecondObject</code>的显示和隐藏，并使得第三个控件根据情况自动布局。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><p>一、新建一个iOS项目，在storyboard中拖入三个UILabel控件，并为其设置合适的AutoLayout约束：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://akring-blog-image.qiniudn.com/Autolayout动态FirstStep.png" alt="第一步" title="">
+                </div>
+                <div class="image-caption">第一步</div>
+            </figure>
+<p>二、 为需要操作的约束设置属性并关联到代码</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://akring-blog-image.qiniudn.com/Autolayout%E5%8A%A8%E6%80%81SecondStep.png" alt="第二步" title="">
+                </div>
+                <div class="image-caption">第二步</div>
+            </figure>
+<blockquote>
+<p>这里的两个约束分别是：  </p>
+<ul>
+<li><code>SecondObjectTopSpace</code>: <code>SecondObject</code>顶部到<code>FirstObject</code>的距离  </li>
+<li><code>secondObjectHeight</code>:  <code>SecondObject</code>的高度  </li>
+</ul>
+</blockquote>
+<p>三、 编写<code>show</code>和<code>hide</code>方法，为约束赋值，直接控制<code>SecondObject</code>的高度和距离’FirstObject’的顶部距离，从而达到完全隐藏/显示<code>SecondObject</code>的目的。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">IBAction</span>)show:(<span class="keyword">id</span>)sender&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span>.secondObjectHeight.constant = <span class="number">107</span>;</span><br><span class="line">    <span class="keyword">self</span>.SecondObjectTopSpace.constant = <span class="number">60</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">IBAction</span>)hide:(<span class="keyword">id</span>)sender&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span>.secondObjectHeight.constant = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">self</span>.SecondObjectTopSpace.constant = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>示例代码下载：</p>
+<p><a href="https://bitbucket.org/akring/autolayouttest" target="_blank" rel="noopener">AutoLayoutTest</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-04-19T07:56:20.912Z" itemprop="dateUpdated">2017-04-19 15:56:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.akringblog.com">
+            <img src="/img/avatar.png" alt="Akring">
+            Akring
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&title=Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&title=Akring's Blog&source=AutoLayout动态隐藏控件的方法使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Akring's Blog&url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/07/支付宝报错rsa_private read error  private key is NULL的解决方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/04/07/Origami初步教程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!-- 
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p> -->
+        <p><br></p>
+    </div>
+    <div class="bottom">
+        <p><span>Akring &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&title=《No title》 — Akring's Blog&pic=https://www.akringblog.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&title=《No title》 — Akring's Blog&source=AutoLayout动态隐藏控件的方法使用AutoLayout有一段时间了，配合Xcode6新推出的size class做界面适配和自适应布局非常好用。目..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Akring's Blog&url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/&via=https://www.akringblog.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.akringblog.com/2017/04/07/AutoLayout动态隐藏控件的方法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3awWojMRAEUP//T2dhTwtry1UtKU7gzWkI9oyeDJJS3Y9HfH39vf69//9af37/+clzhhceHh7eaOjrx736y3qg+99dPyGaAjw8PLxrvHyxTjaAltTiiwnCw8PD+yhvPax2yU5g6+nDw8PD+y28/H493Da2wMPDw/tpvCSMyAc6CxqS62LWgoeHh3ehivRz7q/X9/Dw8PBGVfU8SlhvJLMCW/ucJ0/Gw8PDu8B79bVZYWwWTKyPwvlBufiPAQ8PD2+bly/B7VF7FuPOYosiq8bDw8Pb4LWPzhf0tjlg/0j95I14eHh413j7rU55zLrmtcHEm80GDw8P7xovOdruxLv5NjMLKYoAAg8PD+8Qr21v2olic1gb1z75qfDw8PCu8YpDanCAbktZecmtxuPh4eFd4CWRQdsEkMcTbZtC/hw8PDy8T/HaRTxvxpptAHk57ZHMBx4eHt6I10YDO81Ys6W/7h1bhxF4eHh4h3j5i88OZWeaoknHw8PDu8bL44D2sJvExEn5Lb+PCmB4eHh4R3mzBTovUOXbzyzkfbMx4OHh4R3itcX+dhCzz8+mAw8PD+97ePlQZot+24gwazJ4s+/h4eHhXeMl0UAbH+w3IrThMh4eHt49Xvuy2Stn03RqI8HDw8O7wUvKWrPSV17Q2m9HePlJPDw8vKO8vHC1c1DeaTXIj/hvCmB4eHh438KbtVLNylrJ8T0/6OPh4eHd47Wlphw222ZOTRMeHh7ePd5XedVlp2BSZq0GdcqCh4eHd4g320l2Qtt2A0imJvkx8PDw8M7yZoHpftAw2yTaJgY8PDy8e7ydYKIt+bcNW1tZCx4eHt5HeW2pLNl+2jCibVPAw8PD+428ZHFv2xGKv+Ph4eFd4+VhxH7ZrF3i2zgYDw8P7zbvVAEsiSTyweXbyX64jIeHhxfz/gBly5xxWDMCYwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
